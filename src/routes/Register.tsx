@@ -12,7 +12,7 @@ function Register(props: {
     const [confirm, setConfirm] = useState("");
 
     const register = async (): Promise<void> => {
-        const res = await fetch("http://localhost:5555/register", {
+        const res = await fetch("https://api.trtl.co.in/register", {
             method: "POST",
             credentials: "include",
             headers: {

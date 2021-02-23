@@ -9,7 +9,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
     const [password, setPassword] = useState("");
 
     const login = async (): Promise<void> => {
-        const res = await fetch("http://localhost:5555/auth", {
+        const res = await fetch("https://api.trtl.co.in/auth", {
             method: "POST",
             credentials: "include",
             headers: {

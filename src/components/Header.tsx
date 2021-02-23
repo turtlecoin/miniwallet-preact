@@ -7,7 +7,7 @@ function Header(props: {
     setUser: (user: User | null) => void;
 }): h.JSX.Element {
     const logout = async (): Promise<void> => {
-        await fetch("http://localhost:5555/logout", {
+        await fetch("https://api.trtl.co.in/logout", {
             method: "POST",
             credentials: "include",
         });

@@ -19,7 +19,7 @@ export function Send(props: {
         try {
             const amt = Number.parseInt(amount, 10);
             console.log(amt);
-            const res = await fetch(`http://localhost:5555/wallet/send`, {
+            const res = await fetch(`https://api.trtl.co.in/wallet/send`, {
                 method: "POST",
                 credentials: "include",
                 headers: {

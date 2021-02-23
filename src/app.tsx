@@ -19,7 +19,7 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch("http://localhost:5555/whoami", {
+            const res = await fetch("https://api.trtl.co.in", {
                 credentials: "include",
                 method: "GET",
             });
@@ -32,7 +32,7 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch("http://localhost:5555/wallet/balance", {
+            const res = await fetch("https://api.trtl.co.in/wallet/balance", {
                 credentials: "include",
                 method: "GET",
             });
@@ -46,7 +46,7 @@ const App: FunctionalComponent = () => {
     useMemo(() => {
         (async (): Promise<void> => {
             const res = await fetch(
-                "http://localhost:5555/wallet/transactions",
+                "https://api.trtl.co.in/wallet/transactions",
                 {
                     credentials: "include",
                     method: "GET",
