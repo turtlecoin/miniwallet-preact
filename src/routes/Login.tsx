@@ -35,6 +35,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
             <div class="aligner-item aligner-item--top" />
             <div class="aligner-item">
                 <div class="box">
+                    <h5 class="monospace">welcome to miniwallet</h5>
                     <label>Username:</label>
                     <input
                         type="text"

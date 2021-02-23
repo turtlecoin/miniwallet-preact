@@ -123,19 +123,12 @@ button.button-ghost:hover {
     max-width: 50%;
 }
 
-@media (min-width: 550px) {
-    .box {
-        max-width: 80vw;
-    }
-}
-
-@media (min-width: 400px) {
-    .box {
-        max-width: 85vw;
-    }
-}
-
 .box {
-    width: 600px;
+    width: 80vw;
+    max-width: 500px;
     margin: auto;
+}
+
+.monospace {
+    font-family: monospace;
 }

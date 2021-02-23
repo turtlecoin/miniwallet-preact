@@ -35,6 +35,7 @@ function Register(props: {
             <div class="aligner-item aligner-item--top" />
             <div class="aligner-item">
                 <div class="box">
+                    <h5 class="centered monospace">welcome to miniwallet</h5>
                     <label>Username:</label>
                     <input
                         type="text"
