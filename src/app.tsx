@@ -11,6 +11,7 @@ import Receive from "./routes/Receive";
 import Send from "./routes/Send";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
+import { route } from "preact-router";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -26,6 +27,8 @@ const App: FunctionalComponent = () => {
 
             if (res.status === 200) {
                 setUser(await res.json());
+            } else {
+                route("/login")
             }
         })();
     }, []);

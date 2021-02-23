@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { h } from "preact";
-import { route } from "preact-router";
 import { Transaction, User } from "../types";
 import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 
@@ -10,11 +9,8 @@ function Home(props: {
     balance: { total: number; available: number };
     transactions: Transaction[];
 }): h.JSX.Element {
-    if (props.user === null) {
-        (async (): Promise<void> => {
-            route("/login");
-        })();
-        return <span />;
+    if (!props.user) {
+        return <span />
     }
 
     return (
