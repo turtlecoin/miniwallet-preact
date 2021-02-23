@@ -1,6 +1,7 @@
 import { Fragment, h } from "preact";
 import { Link } from "preact-router/match";
 import { User } from "../types";
+import { route } from "preact-router";
 
 function Header(props: {
     user: User | null;
@@ -12,6 +13,7 @@ function Header(props: {
             credentials: "include",
         });
         props.setUser(null);
+        route("/login");
     };
 
     if (!props.user) {
