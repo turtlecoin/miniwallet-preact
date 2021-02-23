@@ -125,13 +125,13 @@ button.button-ghost:hover {
 
 @media (min-width: 550px) {
     .box {
-        max-width: 80%;
+        max-width: 80vw;
     }
 }
 
 @media (min-width: 400px) {
     .box {
-        max-width: 85%;
+        max-width: 85vw;
     }
 }
 

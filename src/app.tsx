@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FunctionalComponent, h } from "preact";
-import { Route, Router } from "preact-router";
+import { Route, Router, route } from "preact-router";
 
 import Home from "./routes/Home";
 import NotFoundPage from "./routes/404";
@@ -11,7 +11,6 @@ import Receive from "./routes/Receive";
 import Send from "./routes/Send";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
-import { route } from "preact-router";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
