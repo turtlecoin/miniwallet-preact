@@ -19,7 +19,7 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch("https://api.trtl.co.in", {
+            const res = await fetch("https://api.trtl.co.in/whoami", {
                 credentials: "include",
                 method: "GET",
             });
