@@ -6,9 +6,11 @@ import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 function Home(props: {
     user: User | null;
     setUser: (user: User | null) => void;
-    balance: { total: number; available: number };
+    balance: { unlocked: number; locked: number };
     transactions: Transaction[];
 }): h.JSX.Element {
+    const total = props.balance.unlocked + props.balance.locked;
+
     if (!props.user) {
         return <span />
     }
@@ -17,18 +19,18 @@ function Home(props: {
         <div class="card container">
             <label>@{props.user.username}</label>
             <div class="balance">
-                <h4>{prettyPrintAmount(props.balance.total)}</h4>
-                {props.balance.available < props.balance.total && (
+                <h4>{prettyPrintAmount(total)}</h4>
+                {props.balance.unlocked < total && (
                     <p class="alert--info">
                         {prettyPrintAmount(
-                            props.balance.total - props.balance.available
+                            total - props.balance.unlocked
                         )}{" "}
-                        on hold
+                        locked
                     </p>
                 )
             }
             </div>
-            <div>
+            {props.transactions.length > 0 && <div>
                 <table>
                     <thead>
                         <tr>
@@ -42,10 +44,9 @@ function Home(props: {
                             <tr key={tx.hash}>
                                 {/* <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td> */}
                                 <td>
-                                    {tx.hash.slice(
-                                        tx.hash.length - 6,
-                                        tx.hash.length
-                                    )}
+                                    <a class="monospace" href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`} target="_blank" rel="noreferrer">
+                                    {tx.hash.slice(tx.hash.length  - 12, tx.hash.length)}
+                                    </a>
                                 </td>
                                 <td class="is-right-justified">
                                     {prettyPrintAmount(tx.amount)}
@@ -54,7 +55,11 @@ function Home(props: {
                         ))}
                     </tbody>
                 </table>
-            </div>
+            </div>}
+            {props.transactions.length === 0 && <p>
+                    You don't have any transactions yet!
+            </p>}
+            
         </div>
     );
 }

@@ -2,13 +2,14 @@ import { Fragment, h } from "preact";
 import { Link } from "preact-router/match";
 import { User } from "../types";
 import { route } from "preact-router";
+import { API_URI } from "../constants/config";
 
 function Header(props: {
     user: User | null;
     setUser: (user: User | null) => void;
 }): h.JSX.Element {
     const logout = async (): Promise<void> => {
-        await fetch("https://api.trtl.co.in/logout", {
+        await fetch(`${API_URI}/logout`, {
             method: "POST",
             credentials: "include",
         });

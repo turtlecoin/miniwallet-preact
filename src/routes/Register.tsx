@@ -3,6 +3,7 @@ import { h } from "preact";
 import { useState } from "preact/hooks";
 import { route } from "preact-router";
 import { User } from "../types";
+import { API_URI } from "../constants/config";
 
 function Register(props: {
     setUser: (user: User | null) => void;
@@ -12,7 +13,7 @@ function Register(props: {
     const [confirm, setConfirm] = useState("");
 
     const register = async (): Promise<void> => {
-        const res = await fetch("https://api.trtl.co.in/register", {
+        const res = await fetch(`${API_URI}/register`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -35,7 +36,7 @@ function Register(props: {
         <div class="aligner">
             <div class="aligner-item aligner-item--top" />
             <div class="card aligner-item">
-                <div class="box">
+                <div class="box container pinched">
                     <h5 class="centered">Welcome to miniwallet</h5>
                     <label>Username:</label>
                     <input

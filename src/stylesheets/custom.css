@@ -7,6 +7,15 @@ body {
     color: #354052;
 }
 
+a {
+    color: #43b380;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #43b381fd;
+}
+
 code {
     white-space: pre-line !important;
     overflow-wrap: break-word;
@@ -168,7 +177,6 @@ button.button-ghost:hover {
 
 .box {
     width: 80vw;
-    max-width: 500px;
     margin: auto;
 }
 
@@ -182,6 +190,6 @@ button.button-ghost:hover {
 
 @media (max-width: 750px) {
     .card {
-        width: 95%
+        width: 95%;
     }
 }

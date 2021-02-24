@@ -11,6 +11,7 @@ import Receive from "./routes/Receive";
 import Send from "./routes/Send";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
+import { API_URI } from "./constants/config";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -19,7 +20,7 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch("https://api.trtl.co.in/whoami", {
+            const res = await fetch(`${API_URI}/whoami`, {
                 credentials: "include",
                 method: "GET",
             });
@@ -34,7 +35,7 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch("https://api.trtl.co.in/wallet/balance", {
+            const res = await fetch(`${API_URI}/wallet/balance`, {
                 credentials: "include",
                 method: "GET",
             });
@@ -48,7 +49,7 @@ const App: FunctionalComponent = () => {
     useMemo(() => {
         (async (): Promise<void> => {
             const res = await fetch(
-                "https://api.trtl.co.in/wallet/transactions",
+                `${API_URI}/wallet/transactions`,
                 {
                     credentials: "include",
                     method: "GET",

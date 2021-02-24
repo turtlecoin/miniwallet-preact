@@ -2,6 +2,7 @@
 import { h } from "preact";
 import { route } from "preact-router";
 import { useState } from "preact/hooks";
+import { API_URI } from "../constants/config";
 import { User } from "../types";
 
 function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
@@ -9,7 +10,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
     const [password, setPassword] = useState("");
 
     const login = async (): Promise<void> => {
-        const res = await fetch("https://api.trtl.co.in/auth", {
+        const res = await fetch(`${API_URI}/auth`, {
             method: "POST",
             credentials: "include",
             headers: {
@@ -34,7 +35,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
         <div class="aligner">
             <div class="aligner-item aligner-item--top" />
             <div class="card aligner-item">
-                <div class="box">
+                <div class="box container">
                     <h5 class="centered">Welcome to miniwallet</h5>
                     <label>Username:</label>
                     <input

@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { useState } from "preact/hooks";
+import { API_URI } from "../constants/config";
 import { Transaction } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
 
@@ -19,7 +20,7 @@ export function Send(props: {
         try {
             const amt = Number.parseInt(amount, 10);
             console.log(amt);
-            const res = await fetch(`https://api.trtl.co.in/wallet/send`, {
+            const res = await fetch(`${API_URI}/wallet/send`, {
                 method: "POST",
                 credentials: "include",
                 headers: {
