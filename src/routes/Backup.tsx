@@ -60,7 +60,8 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
             {secrets.spendKey !== "" && (
                 <div>
                     <p class="alert--info">
-                        Do not share these keys with anybody, you will lose your funds.
+                        Do not share these keys with anybody, you will lose your
+                        funds.
                     </p>
                     <pre>
                         <label>Private Spend Key:</label>

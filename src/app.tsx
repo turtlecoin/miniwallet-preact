@@ -25,7 +25,6 @@ const App: FunctionalComponent = () => {
                 credentials: "include",
                 method: "GET",
             });
-
             if (res.status === 200) {
                 setUser(await res.json());
             } else {
@@ -47,7 +46,6 @@ const App: FunctionalComponent = () => {
             if (res.status === 200) {
                 setBalance(await res.json());
             }
-
         })();
     }, [user]);
 

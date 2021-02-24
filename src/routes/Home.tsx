@@ -42,7 +42,11 @@ function Home(props: {
                             {props.transactions.map((tx) => (
                                 <tr key={tx.hash}>
                                     <td>{tx.blockHeight}</td>
-                                    <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td>
+                                    <td>
+                                        {new Date(
+                                            tx.timestamp * 1000
+                                        ).toLocaleString()}
+                                    </td>
                                     <td>
                                         <a
                                             class="monospace"
