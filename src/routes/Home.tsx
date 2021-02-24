@@ -14,17 +14,20 @@ function Home(props: {
     }
 
     return (
-        <div class="container">
+        <div class="card container">
             <label>@{props.user.username}</label>
-            <h4>{prettyPrintAmount(props.balance.total)}</h4>
-            {props.balance.available < props.balance.total && (
-                <p class="danger">
-                    {prettyPrintAmount(
-                        props.balance.total - props.balance.available
-                    )}{" "}
-                    on hold
-                </p>
-            )}
+            <div class="balance">
+                <h4>{prettyPrintAmount(props.balance.total)}</h4>
+                {props.balance.available < props.balance.total && (
+                    <p class="alert--info">
+                        {prettyPrintAmount(
+                            props.balance.total - props.balance.available
+                        )}{" "}
+                        on hold
+                    </p>
+                )
+            }
+            </div>
             <div>
                 <table>
                     <thead>

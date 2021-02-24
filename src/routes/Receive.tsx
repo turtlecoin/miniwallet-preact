@@ -7,12 +7,12 @@ export function Receive(props: { user: User | null }): h.JSX.Element {
     const [copied, setCopied] = useState(false);
 
     return (
-        <div class="container">
+        <div class="card container">
             <label>Address:</label>
             <pre>
                 <code>{props.user?.address}</code>
             </pre>
-            <button
+            <button class="button-primary"
                 onClick={(): void => {
                     navigator.clipboard.writeText(props.user!.address);
                     setCopied(true);

@@ -2,6 +2,11 @@ html {
     padding-top: 8rem;
 }
 
+body {
+    background-color: #f5f7fb;
+    color: #354052;
+}
+
 code {
     white-space: pre-line !important;
     overflow-wrap: break-word;
@@ -9,6 +14,18 @@ code {
 
 table {
     width: 100%;
+}
+
+thead {
+    font-weight: 600;
+}
+
+tbody td {
+    border-bottom: none;
+}
+
+tbody tr:not(:last-child){
+    border-bottom: 1px solid #e1e1e1;
 }
 
 input {
@@ -30,11 +47,18 @@ pre {
     margin: 0rem 0rem 1.5rem 0rem;
 }
 
+.card {
+    background-color: #fff;
+    padding: 1rem 2rem;
+    border: 1px solid rgba(110,117,130,.2);
+    border-radius: 3px;
+}
+
 .navbar {
     position: absolute;
     overflow: hidden;
     width: 100%;
-    background-color: #2c806a;
+    background-color: #43b380;
 }
 
 .navbar > div > li {
@@ -42,22 +66,23 @@ pre {
     box-sizing: inherit;
     float: left;
     margin-bottom: 0rem;
+    padding:5px;
 }
 
-.navbar > div > li > a {
-    border-top: 5px inset transparent;
+.navbar > div > li:last-child {
+    float: right;
 }
 
-.navbar > div > li:hover {
-    background-color: #27735f;
+
+.navbar > div > li > a:hover {
+    background-color: rgba(0,0,0,.1);
 }
 
 .navbar > div > li > a.active {
     font-weight: bold;
 }
 .navbar > div > li > a.active {
-    background-color: #27735f;
-    border-top: 5px solid #3C3A62;
+    background-color: rgba(0,0,0,.1);
     font-weight: bold;
 }
 
@@ -65,16 +90,34 @@ pre {
     display: block;
     color: #fff;
     text-align: center;
-    padding: 1rem 1rem;
+    padding: 0.5rem 1rem;
     text-decoration: none;
+    border-radius: 3px;
+    transition: .3s;
 }
 
 .navbar-left {
     float: left;
 }
 
-.danger {
-    color: #e27f7e;
+.balance {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert--info {
+    padding: 0.5rem 1rem;
+    color: #6852ac;
+    background-color:#ddd7ed;
+    display: inline-block;
+    border: 1px solid #6852ac;
+    border-radius: 3px;
+}
+
+button {
+    transition: .3s;
 }
 
 .buttons > button {
@@ -131,4 +174,14 @@ button.button-ghost:hover {
 
 .monospace {
     font-family: monospace;
+}
+
+.centered {
+    text-align: center;
+}
+
+@media (max-width: 750px) {
+    .card {
+        width: 95%
+    }
 }

@@ -52,7 +52,7 @@ export function Send(props: {
     };
 
     return (
-        <div class="container">
+        <div class="card container">
             <label>Amount:</label>
             <input
                 type="number"

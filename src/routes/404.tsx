@@ -3,7 +3,7 @@ import { route } from "preact-router";
 
 const Notfound: FunctionalComponent = () => {
     return (
-        <div class="container">
+        <div class="card container">
             <h1>Error 404</h1>
             <p>That page doesn&apos;t exist.</p>
             <button
