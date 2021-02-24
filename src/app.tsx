@@ -36,6 +36,9 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
+            if (user === null) {
+                return;
+            }
             const res = await fetch(`${API_URI}/wallet/balance`, {
                 credentials: "include",
                 method: "GET",
@@ -44,10 +47,14 @@ const App: FunctionalComponent = () => {
             if (res.status === 200) {
                 setBalance(await res.json());
             }
+
         })();
     }, [user]);
 
     useMemo(() => {
+        if (user === null) {
+            return;
+        }
         (async (): Promise<void> => {
             const res = await fetch(`${API_URI}/wallet/transactions`, {
                 credentials: "include",

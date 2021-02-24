@@ -32,7 +32,8 @@ function Home(props: {
                     <table>
                         <thead>
                             <tr>
-                                {/* <td>Time</td> */}
+                                <td>Block Height</td>
+                                <td>Time</td>
                                 <td>Hash</td>
                                 <td>Amount</td>
                             </tr>
@@ -40,7 +41,8 @@ function Home(props: {
                         <tbody>
                             {props.transactions.map((tx) => (
                                 <tr key={tx.hash}>
-                                    {/* <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td> */}
+                                    <td>{tx.blockHeight}</td>
+                                    <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td>
                                     <td>
                                         <a
                                             class="monospace"

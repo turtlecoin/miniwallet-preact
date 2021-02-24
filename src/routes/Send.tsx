@@ -19,7 +19,6 @@ export function Send(props: {
         setSubmitting(true);
         try {
             const amt = Number.parseInt(amount, 10);
-            console.log(amt);
             const res = await fetch(`${API_URI}/wallet/send`, {
                 method: "POST",
                 credentials: "include",
