@@ -47,6 +47,9 @@ function Header(props: {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link href="/backup">Backup</Link>
+                                </li>
+                                <li>
                                     <Link onClick={logout} href="/">
                                         Logout
                                     </Link>

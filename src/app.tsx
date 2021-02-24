@@ -12,10 +12,11 @@ import Send from "./routes/Send";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import { API_URI } from "./constants/config";
+import Backup from "./routes/Backup";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
-    const [balance, setBalance] = useState({ total: 0, available: 0 });
+    const [balance, setBalance] = useState({ locked: 0, unlocked: 0 });
     const [transactions, setTransactions] = useState<Transaction[]>([]);
 
     useMemo(() => {
@@ -28,7 +29,7 @@ const App: FunctionalComponent = () => {
             if (res.status === 200) {
                 setUser(await res.json());
             } else {
-                route("/login")
+                route("/login");
             }
         })();
     }, []);
@@ -48,13 +49,10 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch(
-                `${API_URI}/wallet/transactions`,
-                {
-                    credentials: "include",
-                    method: "GET",
-                }
-            );
+            const res = await fetch(`${API_URI}/wallet/transactions`, {
+                credentials: "include",
+                method: "GET",
+            });
 
             if (res.status === 200) {
                 setTransactions(await res.json());
@@ -99,6 +97,10 @@ const App: FunctionalComponent = () => {
                     component={(): h.JSX.Element => (
                         <Register setUser={setUser} />
                     )}
+                />
+                <Route
+                    path="/backup"
+                    component={(): h.JSX.Element => <Backup user={user} />}
                 />
                 <NotFoundPage default />
             </Router>

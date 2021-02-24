@@ -33,7 +33,7 @@ tbody td {
     border-bottom: none;
 }
 
-tbody tr:not(:last-child){
+tbody tr:not(:last-child) {
     border-bottom: 1px solid #e1e1e1;
 }
 
@@ -59,7 +59,7 @@ pre {
 .card {
     background-color: #fff;
     padding: 1rem 2rem;
-    border: 1px solid rgba(110,117,130,.2);
+    border: 1px solid rgba(110, 117, 130, 0.2);
     border-radius: 3px;
 }
 
@@ -75,23 +75,22 @@ pre {
     box-sizing: inherit;
     float: left;
     margin-bottom: 0rem;
-    padding:5px;
+    padding: 5px;
 }
 
 .navbar > div > li:last-child {
     float: right;
 }
 
-
 .navbar > div > li > a:hover {
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .navbar > div > li > a.active {
     font-weight: bold;
 }
 .navbar > div > li > a.active {
-    background-color: rgba(0,0,0,.1);
+    background-color: rgba(0, 0, 0, 0.1);
     font-weight: bold;
 }
 
@@ -102,7 +101,7 @@ pre {
     padding: 0.5rem 1rem;
     text-decoration: none;
     border-radius: 3px;
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .navbar-left {
@@ -119,14 +118,14 @@ pre {
 .alert--info {
     padding: 0.5rem 1rem;
     color: #6852ac;
-    background-color:#ddd7ed;
+    background-color: #ddd7ed;
     display: inline-block;
     border: 1px solid #6852ac;
     border-radius: 3px;
 }
 
 button {
-    transition: .3s;
+    transition: 0.3s;
 }
 
 .buttons > button {

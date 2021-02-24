@@ -12,7 +12,7 @@ function Home(props: {
     const total = props.balance.unlocked + props.balance.locked;
 
     if (!props.user) {
-        return <span />
+        return <span />;
     }
 
     return (
@@ -22,44 +22,50 @@ function Home(props: {
                 <h4>{prettyPrintAmount(total)}</h4>
                 {props.balance.unlocked < total && (
                     <p class="alert--info">
-                        {prettyPrintAmount(
-                            total - props.balance.unlocked
-                        )}{" "}
+                        {prettyPrintAmount(total - props.balance.unlocked)}{" "}
                         locked
                     </p>
-                )
-            }
+                )}
             </div>
-            {props.transactions.length > 0 && <div>
-                <table>
-                    <thead>
-                        <tr>
-                            {/* <td>Time</td> */}
-                            <td>Hash</td>
-                            <td>Amount</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.transactions.map((tx) => (
-                            <tr key={tx.hash}>
-                                {/* <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td> */}
-                                <td>
-                                    <a class="monospace" href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`} target="_blank" rel="noreferrer">
-                                    {tx.hash.slice(tx.hash.length  - 12, tx.hash.length)}
-                                    </a>
-                                </td>
-                                <td class="is-right-justified">
-                                    {prettyPrintAmount(tx.amount)}
-                                </td>
+            {props.transactions.length > 0 && (
+                <div>
+                    <table>
+                        <thead>
+                            <tr>
+                                {/* <td>Time</td> */}
+                                <td>Hash</td>
+                                <td>Amount</td>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>}
-            {props.transactions.length === 0 && <p>
-                    You don't have any transactions yet!
-            </p>}
-            
+                        </thead>
+                        <tbody>
+                            {props.transactions.map((tx) => (
+                                <tr key={tx.hash}>
+                                    {/* <td>{new Date(tx.timestamp * 1000).toLocaleString()}</td> */}
+                                    <td>
+                                        <a
+                                            class="monospace"
+                                            href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                        >
+                                            {tx.hash.slice(
+                                                tx.hash.length - 12,
+                                                tx.hash.length
+                                            )}
+                                        </a>
+                                    </td>
+                                    <td class="is-right-justified">
+                                        {prettyPrintAmount(tx.amount)}
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            )}
+            {props.transactions.length === 0 && (
+                <p>You don't have any transactions yet!</p>
+            )}
         </div>
     );
 }
