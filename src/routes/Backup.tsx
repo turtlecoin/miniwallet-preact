@@ -40,7 +40,7 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
 
     return (
         <div class="card container">
-            <h2>Backup</h2>
+            <h3>Backup</h3>
             {secrets.spendKey === "" && (
                 <div>
                     <label>Enter Password:</label>
@@ -59,9 +59,10 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
             )}
             {secrets.spendKey !== "" && (
                 <div>
+                    <p class="alert--info">
+                        Do not share these keys with anybody, you will lose your funds.
+                    </p>
                     <pre>
-                        <label>Public Address:</label>
-                        <p>{props.user.address}</p>
                         <label>Private Spend Key:</label>
                         <p>{secrets.spendKey}</p>
                         <label>Private View Key:</label>
