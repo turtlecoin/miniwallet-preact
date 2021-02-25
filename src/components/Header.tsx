@@ -1,5 +1,5 @@
 import { Fragment, h } from "preact";
-import { Link } from "preact-router/match";
+import { Link, LinkProps } from "preact-router/match";
 import { User } from "../types";
 import { route } from "preact-router";
 import { API_URI } from "../constants/config";
@@ -50,15 +50,7 @@ function Header(props: {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/backup"
-                                        activeClassName="active"
-                                    >
-                                        Backup
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link
-                                        href="/account"
+                                        href="/account/:page"
                                         activeClassName="active"
                                     >
                                         Account

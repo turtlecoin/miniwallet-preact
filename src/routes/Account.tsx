@@ -4,6 +4,8 @@ import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
+import Backup from "../components/Backup";
+import { Router, Route, Link, route } from "preact-router";
 
 interface TOTPRes {
     secret: string;
@@ -11,8 +13,10 @@ interface TOTPRes {
 }
 
 export function Account(props: {
+    matches?: Record<string, any>;
     setUser: (user: User | null) => void;
     user: User | null;
+    path: string;
 }): h.JSX.Element {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -24,7 +28,14 @@ export function Account(props: {
     const [disenrollPw, setDisenrollPw] = useState("");
     const [disenrollToken, setDisenrollToken] = useState("");
 
-    const changePassword = async () => {
+    const { page } = props.matches as { page?: string };
+
+    if (page === ":page") {
+        route("/account/password", true);
+        return <span />;
+    }
+
+    const changePassword = async (): Promise<void> => {
         if (newPassword !== confirmPassword) {
             alert("Passwords do not match.");
             return;
@@ -109,126 +120,173 @@ export function Account(props: {
     return (
         <div class="card container">
             <div>
-                <h4 class="title">@{props.user.username}</h4>
-                <hr />
-                <form
-                    onSubmit={(event): void => {
-                        event.preventDefault();
-                        changePassword();
-                    }}
-                >
-                    <h5>Change Your Password</h5>
-                    <label>Old Password:</label>
-                    <input
-                        autoComplete={"current-password"}
-                        value={oldPassword}
-                        onInput={(event: any): void => {
-                            setOldPassword(event.target.value);
-                        }}
-                        type="password"
-                        placeholder="hunter2"
-                    />
-
-                    <input autoComplete="username" class="hidden" />
-                    <div class="row">
-                        <div class="six columns">
-                            <label>New Password:</label>
-                            <input
-                                autoComplete={"new-password"}
-                                value={newPassword}
-                                onInput={(event: any): void => {
-                                    setNewPassword(event.target.value);
-                                }}
-                                type="password"
-                                placeholder="hunter42"
-                            />
-                        </div>
-                        <div class="six columns">
-                            <label>Confirm Password:</label>
-                            <input
-                                autoComplete={"new-password"}
-                                value={confirmPassword}
-                                onInput={(event: any): void => {
-                                    setConfirmPassword(event.target.value);
-                                }}
-                                type="password"
-                                placeholder="hunter42"
-                            />
-                        </div>
-                    </div>
-                    <button type="submit" class="button-primary">
-                        Change Password
-                    </button>
-                </form>
-                <hr />
-                {props.user.twoFactor && (
-                    <div>
-                        <h4>✓ 2FA Enabled</h4>
-                        <h6>Authenticate to Disable</h6>
-                        <form
-                            onSubmit={(event) => {
-                                event.preventDefault();
-                                disenroll2FAKey();
-                            }}
+                <ul class="tabs">
+                    <li>
+                        <Link
+                            href={"/account/password"}
+                            class={`${
+                                page === "" || page === "password"
+                                    ? "active"
+                                    : ""
+                            }`}
                         >
-                            <label>Password</label>
-                            <input
-                                value={disenrollPw}
-                                onInput={(event: any) => {
-                                    setDisenrollPw(event.target.value);
-                                }}
-                                type="password"
-                                autoComplete="current-password"
-                            />
-                            <label>2FA Code</label>
-                            <input
-                                value={disenrollToken}
-                                onInput={(event: any) => {
-                                    setDisenrollToken(event.target.value);
-                                }}
-                                type="number"
-                            />
-                            <button type="submit">Disable</button>
-                        </form>
-                    </div>
-                )}
-                {!props.user.twoFactor && (
-                    <div>
-                        <h4>Enable 2FA</h4>
-                        {!qrData && (
-                            <button onClick={get2FAKey}>Get Code</button>
-                        )}
-                        {qrData && (
-                            <div>
-                                <p>
-                                    Scan this QR code with your authenticator
-                                    app or enter the secret below, and submit
-                                    the code.
-                                </p>
-                                <img
-                                    src={`data:image/png;base64, ${qrData.qr}`}
+                            Password
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={"/account/2fa"}
+                            class={`${page === "2fa" ? "active" : ""}`}
+                        >
+                            2FA
+                        </Link>
+                    </li>
+                    <li>
+                        <Link
+                            href={"/account/backup"}
+                            class={`${page === "backup" ? "active" : ""}`}
+                        >
+                            Backup
+                        </Link>
+                    </li>
+                </ul>
+
+                {(page === "" || page === "password") && (
+                    <form
+                        onSubmit={(event): void => {
+                            event.preventDefault();
+                            changePassword();
+                        }}
+                    >
+                        <h5>Change Your Password</h5>
+                        <label>Old Password:</label>
+                        <input
+                            autoComplete={"current-password"}
+                            value={oldPassword}
+                            onInput={(event: any): void => {
+                                setOldPassword(event.target.value);
+                            }}
+                            type="password"
+                            placeholder="hunter2"
+                        />
+
+                        <input autoComplete="username" class="hidden" />
+                        <div class="row">
+                            <div class="six columns">
+                                <label>New Password:</label>
+                                <input
+                                    autoComplete={"new-password"}
+                                    value={newPassword}
+                                    onInput={(event: any): void => {
+                                        setNewPassword(event.target.value);
+                                    }}
+                                    type="password"
+                                    placeholder="hunter42"
                                 />
-                                <p class="monospace">{qrData.secret}</p>
-                                <label>Enter Code:</label>
+                            </div>
+                            <div class="six columns">
+                                <label>Confirm Password:</label>
+                                <input
+                                    autoComplete={"new-password"}
+                                    value={confirmPassword}
+                                    onInput={(event: any): void => {
+                                        setConfirmPassword(event.target.value);
+                                    }}
+                                    type="password"
+                                    placeholder="hunter42"
+                                />
+                            </div>
+                        </div>
+                        <button type="submit" class="button-primary">
+                            Change Password
+                        </button>
+                    </form>
+                )}
+                {page === "2fa" && (
+                    <div>
+                        {props.user?.twoFactor && (
+                            <div>
+                                <h5>✓ 2FA Enabled</h5>
                                 <form
                                     onSubmit={(event) => {
                                         event.preventDefault();
-                                        enroll2FAKey();
+                                        disenroll2FAKey();
                                     }}
                                 >
+                                    <label>Password</label>
                                     <input
-                                        value={token}
-                                        type="number"
+                                        value={disenrollPw}
                                         onInput={(event: any) => {
-                                            setToken(event.target.value);
+                                            setDisenrollPw(event.target.value);
                                         }}
+                                        type="password"
+                                        autoComplete="current-password"
                                     />
-                                    <button type="submit">Enroll in 2FA</button>
+                                    <label>2FA Code</label>
+                                    <input
+                                        value={disenrollToken}
+                                        onInput={(event: any) => {
+                                            setDisenrollToken(
+                                                event.target.value
+                                            );
+                                        }}
+                                        type="number"
+                                    />
+                                    <button
+                                        type="submit"
+                                        class="button-primary"
+                                    >
+                                        Disable 2FA
+                                    </button>
                                 </form>
+                            </div>
+                        )}
+                        {!props.user?.twoFactor && (
+                            <div>
+                                <h5>Enable 2FA</h5>
+                                {!qrData && (
+                                    <button onClick={get2FAKey}>
+                                        Get Code
+                                    </button>
+                                )}
+                                {qrData && (
+                                    <div>
+                                        <p>
+                                            Scan this QR code with your
+                                            authenticator app or enter the
+                                            secret below, and submit the code.
+                                        </p>
+                                        <img
+                                            src={`data:image/png;base64, ${qrData.qr}`}
+                                        />
+                                        <p class="monospace">{qrData.secret}</p>
+                                        <label>Enter Code:</label>
+                                        <form
+                                            onSubmit={(event) => {
+                                                event.preventDefault();
+                                                enroll2FAKey();
+                                            }}
+                                        >
+                                            <input
+                                                value={token}
+                                                type="number"
+                                                onInput={(event: any) => {
+                                                    setToken(
+                                                        event.target.value
+                                                    );
+                                                }}
+                                            />
+                                            <button type="submit button-primary">
+                                                Enable 2FA
+                                            </button>
+                                        </form>
+                                    </div>
+                                )}
                             </div>
                         )}
                     </div>
                 )}
+                {page === "backup" && <Backup user={props.user} />}
             </div>
         </div>
     );

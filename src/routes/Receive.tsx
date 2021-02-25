@@ -4,7 +4,10 @@ import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { User } from "../types";
 
-export function Receive(props: { user: User | null }): h.JSX.Element {
+export function Receive(props: {
+    path: string;
+    user: User | null;
+}): h.JSX.Element {
     const [copied, setCopied] = useState(false);
 
     if (!props.user) {

@@ -5,12 +5,7 @@ import { useState } from "preact/hooks";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
 
-interface Keys {
-    spendKey: string;
-    viewKey: string;
-}
-
-export function Backup(props: { user: User | null }): h.JSX.Element {
+function Backup(props: { user: User | null }): h.JSX.Element {
     const [password, setPassword] = useState("");
     const [secrets, setSecrets] = useState({
         spendKey: "",
@@ -40,7 +35,8 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
     }
 
     return (
-        <div class="card container">
+        <div>
+            <h5>Backup Your Keys</h5>
             {secrets.spendKey === "" && (
                 <div>
                     <form
@@ -68,9 +64,9 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
             )}
             {secrets.spendKey !== "" && (
                 <div>
-                    <p class="alert--info">
-                        Do not share these keys with anybody, you will lose your
-                        funds.
+                    <p class="alert danger">
+                        ⚠ Do not share these keys with anybody, you will lose
+                        your funds.
                     </p>
                     <pre>
                         <label>Private Spend Key:</label>

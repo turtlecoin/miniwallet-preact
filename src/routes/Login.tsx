@@ -5,7 +5,10 @@ import { useState } from "preact/hooks";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
 
-function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
+function Login(props: {
+    path: string;
+    setUser: (user: User | null) => void;
+}): h.JSX.Element {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [collect2FA, setCollect2FA] = useState(false);

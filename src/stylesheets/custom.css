@@ -116,14 +116,27 @@ pre {
     align-items: center;
 }
 
-.alert--info {
+.alert {
     margin-top: 0.5rem;
     padding: 0.5rem 1rem;
+    display: inline-block;
+    border-radius: 3px;
+}
+
+.alert.info {
     color: #6852ac;
     background-color: #ddd7ed;
-    display: inline-block;
     border: 1px solid #6852ac;
-    border-radius: 3px;
+}
+
+.alert.danger {
+    background-color: #f5d2d2;
+    border: 1px solid #eba6a5;
+    color: #290606;
+}
+
+.alert.full-width {
+    width: 100%;
 }
 
 button {
@@ -142,7 +155,6 @@ button {
 
 button.button-ghost {
     text-transform: none;
-    padding: 0rem;
     color: #3c78d8;
     border: none;
 }
@@ -223,6 +235,48 @@ button.button-ghost:hover {
     }
 }
 
+.button-ghost.active {
+    background-color: #f5f5f5;
+}
+
 .title {
     margin-bottom: -1.5rem;
+}
+
+.tabs {
+    list-style: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+.tabs > li {
+    display: inline-block;
+    text-align: center;
+    padding: 0rem 1rem;
+}
+
+.tabs > li > a {
+    color: #3c78d8;
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 3px;
+}
+
+.tabs > li > a.active {
+    background-color: #f5f5f5;
+    color: #2969cf;
+}
+
+.tabs > li > a:hover {
+    color: #2969cf;
+}
+
+.has-text-info {
+    color: #3c78d8;
+}
+
+a.has-text-info:hover {
+    color: #2969cf;
 }

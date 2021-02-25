@@ -5,6 +5,7 @@ import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 import { Loader } from "../components/Loader";
 
 function Home(props: {
+    path: string;
     user: User | null;
     setUser: (user: User | null) => void;
     balance: { unlocked: number; locked: number } | null;
@@ -18,12 +19,21 @@ function Home(props: {
 
     return (
         <div class="card container">
+            {!props.user.twoFactor && (
+                <p class="alert danger">
+                    ⚠ Consider enabling{" "}
+                    <a class="has-text-info" href="/account/2fa">
+                        2FA
+                    </a>{" "}
+                    on your account for added security.
+                </p>
+            )}
             <label>@{props.user.username}</label>
             <div class="balance">
                 <h4>{prettyPrintAmount(total)}</h4>
                 {props.balance.unlocked < total && (
-                    <p class="alert--info">
-                        {prettyPrintAmount(total - props.balance.unlocked)}{" "}
+                    <p class="alert info fullwidth">
+                        🛈 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
                         locked
                     </p>
                 )}

@@ -7,6 +7,7 @@ import { API_URI } from "../constants/config";
 
 function Register(props: {
     setUser: (user: User | null) => void;
+    path: string;
 }): h.JSX.Element {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");

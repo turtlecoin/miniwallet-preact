@@ -8,6 +8,7 @@ import { Transaction } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
 
 export function Send(props: {
+    path: string;
     transactions: Transaction[] | null;
     setTransactions: (txs: Transaction[]) => void;
 }): h.JSX.Element {

@@ -14,7 +14,7 @@ import Register from "./routes/Register";
 import Account from "./routes/Account";
 
 import { API_URI } from "./constants/config";
-import Backup from "./routes/Backup";
+import Backup from "./components/Backup";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -86,50 +86,22 @@ const App: FunctionalComponent = () => {
         <div class="app">
             <Header user={user} setUser={setUser} reset={reset} />
             <Router>
-                <Route
+                <Home
+                    transactions={transactions}
+                    setUser={setUser}
+                    user={user}
+                    balance={balance}
                     path="/"
-                    component={(): h.JSX.Element => (
-                        <Home
-                            transactions={transactions}
-                            setUser={setUser}
-                            user={user}
-                            balance={balance}
-                        />
-                    )}
                 />
-                <Route
-                    path="/receive"
-                    component={(): h.JSX.Element => <Receive user={user} />}
-                />
-                <Route
+                <Receive user={user} path="/receive" />
+                <Send
+                    transactions={transactions}
+                    setTransactions={setTransactions}
                     path="/send"
-                    component={(): h.JSX.Element => (
-                        <Send
-                            transactions={transactions}
-                            setTransactions={setTransactions}
-                        />
-                    )}
                 />
-                <Route
-                    path="/login"
-                    component={(): h.JSX.Element => <Login setUser={setUser} />}
-                />
-                <Route
-                    path="/register"
-                    component={(): h.JSX.Element => (
-                        <Register setUser={setUser} />
-                    )}
-                />
-                <Route
-                    path="/backup"
-                    component={(): h.JSX.Element => <Backup user={user} />}
-                />
-                <Route
-                    path="/account"
-                    component={(): h.JSX.Element => (
-                        <Account setUser={setUser} user={user} />
-                    )}
-                />
+                <Login setUser={setUser} path="/login" />
+                <Register setUser={setUser} path="/register" />
+                <Account path="/account/:page?" setUser={setUser} user={user} />
                 <NotFoundPage default />
             </Router>
         </div>
