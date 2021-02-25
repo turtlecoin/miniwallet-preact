@@ -37,10 +37,12 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
             <div class="card aligner-item">
                 <div class="box container">
                     <h5 class="centered">Welcome to miniwallet</h5>
-                    <form onSubmit={(event): void => {
-                        event.preventDefault();
-                        login();
-                    }}>
+                    <form
+                        onSubmit={(event): void => {
+                            event.preventDefault();
+                            login();
+                        }}
+                    >
                         <label>Username:</label>
                         <input
                             type="text"
@@ -71,9 +73,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
                             </button>
                         </div>
                         <div class="buttons right">
-                            <button type="submit" className="button-primary">
-                                Log In
-                            </button>
+                            <button className="button-primary">Log In</button>
                         </div>
                     </form>
                 </div>

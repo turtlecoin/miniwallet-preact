@@ -13,8 +13,8 @@ function Header(props: {
             method: "POST",
             credentials: "include",
         });
-        props.setUser(null);
         route("/login");
+        props.setUser(null);
     };
 
     if (!props.user) {
@@ -47,7 +47,12 @@ function Header(props: {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link href="/backup">Backup</Link>
+                                    <Link
+                                        href="/backup"
+                                        activeClassName="active"
+                                    >
+                                        Backup
+                                    </Link>
                                 </li>
                                 <li>
                                     <Link onClick={logout} href="/">

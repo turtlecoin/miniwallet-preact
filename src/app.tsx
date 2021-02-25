@@ -16,8 +16,13 @@ import Backup from "./routes/Backup";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
-    const [balance, setBalance] = useState({ locked: 0, unlocked: 0 });
-    const [transactions, setTransactions] = useState<Transaction[]>([]);
+    const [balance, setBalance] = useState<{
+        locked: number;
+        unlocked: number;
+    } | null>(null);
+    const [transactions, setTransactions] = useState<Transaction[] | null>(
+        null
+    );
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -31,10 +36,9 @@ const App: FunctionalComponent = () => {
                 } else {
                     route("/login");
                 }
-            } catch(err) {
+            } catch (err) {
                 console.warn(err.toString());
             }
-            
         })();
     }, []);
 
@@ -71,7 +75,7 @@ const App: FunctionalComponent = () => {
     }, [user]);
 
     return (
-        <div class="">
+        <div class="app">
             <Header user={user} setUser={setUser} />
             <Router>
                 <Route

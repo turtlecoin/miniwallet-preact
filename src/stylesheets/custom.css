@@ -150,9 +150,13 @@ button.button-ghost:hover {
 }
 
 .aligner {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
     display: flex;
     align-items: center;
-    min-height: 24em;
     justify-content: center;
 }
 
@@ -195,4 +199,10 @@ button.button-ghost:hover {
 
 .hidden {
     display: none;
+}
+
+.spinner {
+    text-align: center;
+    color: #6852ac;
+    font-size: 180px;
 }

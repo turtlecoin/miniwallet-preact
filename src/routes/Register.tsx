@@ -38,18 +38,20 @@ function Register(props: {
             <div class="card aligner-item">
                 <div class="box container pinched">
                     <h5 class="centered">Welcome to miniwallet</h5>
-                    <form onSubmit={(event): void => {
-                        event.preventDefault();
-                        register();
-                    }}>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onInput={(event: any): void => {
-                            setUsername(event.target.value);
+                    <form
+                        onSubmit={(event): void => {
+                            event.preventDefault();
+                            register();
                         }}
-                    />
+                    >
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            value={username}
+                            onInput={(event: any): void => {
+                                setUsername(event.target.value);
+                            }}
+                        />
                         <div class="row">
                             <div class="six columns">
                                 <label>Password: </label>
@@ -72,9 +74,7 @@ function Register(props: {
                                 />
                             </div>
                             <div class="buttons right">
-                                <button class="button-primary">
-                                    Register
-                                </button>
+                                <button class="button-primary">Register</button>
                             </div>
                             <div class="buttons">
                                 <button

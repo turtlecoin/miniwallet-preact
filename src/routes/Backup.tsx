@@ -44,10 +44,12 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
             <h3>Backup</h3>
             {secrets.spendKey === "" && (
                 <div>
-                    <form onSubmit={(event): void => {
-                        event.preventDefault();
-                        getSecrets();
-                    }}>
+                    <form
+                        onSubmit={(event): void => {
+                            event.preventDefault();
+                            getSecrets();
+                        }}
+                    >
                         <label>Enter Password:</label>
                         <input autoComplete="username" class="hidden" />
                         <input

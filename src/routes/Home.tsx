@@ -2,18 +2,19 @@
 import { h } from "preact";
 import { Transaction, User } from "../types";
 import { prettyPrintAmount } from "../utils/prettyPrintAmount";
+import { Loader } from "../components/Loader";
 
 function Home(props: {
     user: User | null;
     setUser: (user: User | null) => void;
-    balance: { unlocked: number; locked: number };
-    transactions: Transaction[];
+    balance: { unlocked: number; locked: number } | null;
+    transactions: Transaction[] | null;
 }): h.JSX.Element {
-    const total = props.balance.unlocked + props.balance.locked;
-
-    if (!props.user) {
-        return <span />;
+    if (!props.user || props.transactions == null || props.balance == null) {
+        return <Loader />;
     }
+
+    const total = props.balance.unlocked + props.balance.locked;
 
     return (
         <div class="card container">
@@ -49,15 +50,11 @@ function Home(props: {
                                     </td>
                                     <td>
                                         <a
-                                            class="monospace"
                                             href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
                                             target="_blank"
                                             rel="noreferrer"
                                         >
-                                            {tx.hash.slice(
-                                                tx.hash.length - 12,
-                                                tx.hash.length
-                                            )}
+                                            {tx.hash}
                                         </a>
                                     </td>
                                     <td class="is-right-justified">

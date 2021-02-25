@@ -2,18 +2,23 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { useState } from "preact/hooks";
+import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { Transaction } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
 
 export function Send(props: {
-    transactions: Transaction[];
+    transactions: Transaction[] | null;
     setTransactions: (txs: Transaction[]) => void;
 }): h.JSX.Element {
     const [submitting, setSubmitting] = useState(false);
     const [paymentID, setPaymentID] = useState("");
     const [address, setAddress] = useState("");
     const [amount, setAmount] = useState("");
+
+    if (props.transactions == null) {
+        return <Loader />;
+    }
 
     const submitSend = async (): Promise<void> => {
         setSubmitting(true);
@@ -32,10 +37,12 @@ export function Send(props: {
                 }),
             });
             if (res.status === 200) {
-                const copy = [...props.transactions];
-                copy.unshift(await res.json());
-                props.setTransactions(copy);
-                alert("Sent transaction!");
+                if (props.transactions !== null) {
+                    const copy = [...props.transactions];
+                    copy.unshift(await res.json());
+                    props.setTransactions(copy);
+                    alert("Sent transaction!");
+                }
             } else {
                 const msg = await res.text();
 
@@ -54,10 +61,12 @@ export function Send(props: {
     return (
         <div class="card container">
             <label>Amount:</label>
-            <form onSubmit={(event) => {
-                event.preventDefault();
-                submitSend();
-            }}>
+            <form
+                onSubmit={(event): void => {
+                    event.preventDefault();
+                    submitSend();
+                }}
+            >
                 <input
                     type="number"
                     value={amount}

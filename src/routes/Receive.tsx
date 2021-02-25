@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { useState } from "preact/hooks";
+import { Loader } from "../components/Loader";
 import { User } from "../types";
 
 export function Receive(props: { user: User | null }): h.JSX.Element {
     const [copied, setCopied] = useState(false);
+
+    if (!props.user) {
+        return <Loader />;
+    }
 
     return (
         <div class="card container">
