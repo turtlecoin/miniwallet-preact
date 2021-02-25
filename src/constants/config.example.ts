@@ -1,1 +1,1 @@
-export const API_URI = "https://api.trtl.co.in";
+export const API_URI = "https://trtl.co.in/api";

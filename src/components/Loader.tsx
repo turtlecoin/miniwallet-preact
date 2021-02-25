@@ -6,6 +6,11 @@ const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", 
 
 export function Loader(): h.JSX.Element {
     const [i, setI] = useState(0);
+    const [delay, setDelay] = useState(true);
+
+    useMemo(() => {
+        setTimeout(() => setDelay(false), 1000);
+    }, []);
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -18,6 +23,10 @@ export function Loader(): h.JSX.Element {
             }, 120);
         })();
     }, [i]);
+
+    if (delay) {
+        return <span />;
+    }
 
     return (
         <div class="aligner">

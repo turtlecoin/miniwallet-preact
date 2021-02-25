@@ -64,6 +64,7 @@ pre {
 }
 
 .navbar {
+    z-index: 2;
     position: absolute;
     overflow: hidden;
     width: 100%;
@@ -202,7 +203,9 @@ button.button-ghost:hover {
 }
 
 .spinner {
+    user-select: none;
     text-align: center;
     color: #6852ac;
+    z-index: -1;
     font-size: 180px;
 }
