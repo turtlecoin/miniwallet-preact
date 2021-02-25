@@ -14,6 +14,7 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
     const login = async (): Promise<void> => {
         if (collect2FA && totp === "") {
             alert("2FA code is required.");
+            return;
         }
         const res = await fetch(`${API_URI}/auth`, {
             method: "POST",
