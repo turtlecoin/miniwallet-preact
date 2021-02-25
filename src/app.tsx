@@ -21,15 +21,20 @@ const App: FunctionalComponent = () => {
 
     useMemo(() => {
         (async (): Promise<void> => {
-            const res = await fetch(`${API_URI}/whoami`, {
-                credentials: "include",
-                method: "GET",
-            });
-            if (res.status === 200) {
-                setUser(await res.json());
-            } else {
-                route("/login");
+            try {
+                const res = await fetch(`${API_URI}/whoami`, {
+                    credentials: "include",
+                    method: "GET",
+                });
+                if (res.status === 200) {
+                    setUser(await res.json());
+                } else {
+                    route("/login");
+                }
+            } catch(err) {
+                console.warn(err.toString());
             }
+            
         })();
     }, []);
 
