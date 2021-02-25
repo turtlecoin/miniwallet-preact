@@ -10,7 +10,7 @@
         {
             "src": "/assets/icons/android-chrome-96x96.png",
             "type": "image/png",
-            "sizes": "192x192"
+            "sizes": "96x96"
         }
     ]
 }
