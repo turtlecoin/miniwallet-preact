@@ -61,6 +61,9 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
                                 setPassword(event.target.value);
                             }}
                         />
+                        <div class="buttons right">
+                            <button className="button-primary">Log In</button>
+                        </div>
                         <div class="buttons">
                             <button
                                 class="button-ghost"
@@ -71,9 +74,6 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
                             >
                                 Create account
                             </button>
-                        </div>
-                        <div class="buttons right">
-                            <button className="button-primary">Log In</button>
                         </div>
                     </form>
                 </div>

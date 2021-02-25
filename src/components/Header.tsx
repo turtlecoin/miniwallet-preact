@@ -7,8 +7,10 @@ import { API_URI } from "../constants/config";
 function Header(props: {
     user: User | null;
     setUser: (user: User | null) => void;
+    reset: () => void;
 }): h.JSX.Element {
     const logout = async (): Promise<void> => {
+        props.reset();
         await fetch(`${API_URI}/logout`, {
             method: "POST",
             credentials: "include",
@@ -55,7 +57,7 @@ function Header(props: {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link onClick={logout} href="/">
+                                    <Link onClick={logout} href="#">
                                         Logout
                                     </Link>
                                 </li>

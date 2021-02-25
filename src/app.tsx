@@ -24,6 +24,12 @@ const App: FunctionalComponent = () => {
         null
     );
 
+    const reset = (): void => {
+        setUser(null);
+        setBalance(null);
+        setTransactions(null);
+    }
+
     useMemo(() => {
         (async (): Promise<void> => {
             try {
@@ -76,7 +82,7 @@ const App: FunctionalComponent = () => {
 
     return (
         <div class="app">
-            <Header user={user} setUser={setUser} />
+            <Header user={user} setUser={setUser} reset={reset} />
             <Router>
                 <Route
                     path="/"
