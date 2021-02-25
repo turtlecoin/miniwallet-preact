@@ -33,22 +33,16 @@ function Home(props: {
                     <table>
                         <thead>
                             <tr>
-                                <td>Block Height</td>
-                                <td>Time</td>
-                                <td>Hash</td>
-                                <td>Amount</td>
+                                <td>Height</td>
+                                <td class="desktop-only">Hash</td>
+                                <td class="has-text-right">Amount</td>
                             </tr>
                         </thead>
                         <tbody>
                             {props.transactions.map((tx) => (
                                 <tr key={tx.hash}>
                                     <td>{tx.blockHeight}</td>
-                                    <td>
-                                        {new Date(
-                                            tx.timestamp * 1000
-                                        ).toLocaleString()}
-                                    </td>
-                                    <td>
+                                    <td class="monospace desktop-only">
                                         <a
                                             href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
                                             target="_blank"
@@ -57,7 +51,7 @@ function Home(props: {
                                             {tx.hash}
                                         </a>
                                     </td>
-                                    <td class="is-right-justified">
+                                    <td class="has-text-right">
                                         {prettyPrintAmount(tx.amount)}
                                     </td>
                                 </tr>

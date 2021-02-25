@@ -117,6 +117,7 @@ pre {
 }
 
 .alert--info {
+    margin-top: 0.5rem;
     padding: 0.5rem 1rem;
     color: #6852ac;
     background-color: #ddd7ed;
@@ -186,6 +187,7 @@ button.button-ghost:hover {
 
 .monospace {
     font-family: monospace;
+    font-size: 14px;
 }
 
 .centered {
@@ -208,4 +210,15 @@ button.button-ghost:hover {
     color: #6852ac;
     z-index: -1;
     font-size: 180px;
+}
+
+.has-text-right {
+    text-align: right;
+}
+
+/* Larger than desktop */
+@media (max-width: 1000px) {
+    .desktop-only {
+        display: none;
+    }
 }

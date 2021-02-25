@@ -41,7 +41,6 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
 
     return (
         <div class="card container">
-            <h3>Backup</h3>
             {secrets.spendKey === "" && (
                 <div>
                     <form
@@ -50,7 +49,7 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
                             getSecrets();
                         }}
                     >
-                        <label>Enter Password:</label>
+                        <label>Enter Password to Unlock Keys:</label>
                         <input autoComplete="username" class="hidden" />
                         <input
                             autoComplete={"current-password"}

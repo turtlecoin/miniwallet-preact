@@ -9,7 +9,7 @@ export function Loader(): h.JSX.Element {
     const [delay, setDelay] = useState(true);
 
     useMemo(() => {
-        setTimeout(() => setDelay(false), 1000);
+        setTimeout(() => setDelay(false), 500);
     }, []);
 
     useMemo(() => {
