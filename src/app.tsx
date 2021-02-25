@@ -11,6 +11,8 @@ import Receive from "./routes/Receive";
 import Send from "./routes/Send";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
+import Account from "./routes/Account";
+
 import { API_URI } from "./constants/config";
 import Backup from "./routes/Backup";
 
@@ -28,7 +30,7 @@ const App: FunctionalComponent = () => {
         setUser(null);
         setBalance(null);
         setTransactions(null);
-    }
+    };
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -121,6 +123,12 @@ const App: FunctionalComponent = () => {
                 <Route
                     path="/backup"
                     component={(): h.JSX.Element => <Backup user={user} />}
+                />
+                <Route
+                    path="/account"
+                    component={(): h.JSX.Element => (
+                        <Account setUser={setUser} user={user} />
+                    )}
                 />
                 <NotFoundPage default />
             </Router>

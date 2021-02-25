@@ -57,6 +57,14 @@ function Header(props: {
                                     </Link>
                                 </li>
                                 <li>
+                                    <Link
+                                        href="/account"
+                                        activeClassName="active"
+                                    >
+                                        Account
+                                    </Link>
+                                </li>
+                                <li>
                                     <Link onClick={logout} href="#">
                                         Logout
                                     </Link>

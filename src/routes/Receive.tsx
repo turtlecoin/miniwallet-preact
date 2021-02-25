@@ -13,20 +13,22 @@ export function Receive(props: { user: User | null }): h.JSX.Element {
 
     return (
         <div class="card container">
-            <label>Address:</label>
-            <pre>
-                <code>{props.user?.address}</code>
-            </pre>
-            <button
-                class="button-primary"
-                onClick={(): void => {
-                    navigator.clipboard.writeText(props.user!.address);
-                    setCopied(true);
-                    setTimeout(() => setCopied(false), 1000);
-                }}
-            >
-                {copied ? "Copied!" : "Copy Address"}
-            </button>
+            <div>
+                <label>Address:</label>
+                <pre>
+                    <code>{props.user?.address}</code>
+                </pre>
+                <button
+                    class="button-primary"
+                    onClick={(): void => {
+                        navigator.clipboard.writeText(props.user!.address);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 1000);
+                    }}
+                >
+                    {copied ? "Copied!" : "Copy Address"}
+                </button>
+            </div>
         </div>
     );
 }

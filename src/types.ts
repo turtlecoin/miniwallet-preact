@@ -1,10 +1,9 @@
 export interface User {
     userID: number;
     username: string;
-    passwordHash: string;
-    salt: string;
     address: string;
     paymentID: string;
+    twoFactor: boolean;
 }
 
 export interface Transaction {

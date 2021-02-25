@@ -9,19 +9,25 @@ export function Loader(): h.JSX.Element {
     const [delay, setDelay] = useState(true);
 
     useMemo(() => {
-        setTimeout(() => setDelay(false), 500);
+        const timeout = setTimeout(() => setDelay(false), 500);
+
+        return (): void => {
+            clearInterval(timeout);
+        };
     }, []);
 
     useMemo(() => {
-        (async (): Promise<void> => {
-            setTimeout(() => {
-                if (i < spinner.length - 1) {
-                    setI(i + 1);
-                } else {
-                    setI(0);
-                }
-            }, 120);
-        })();
+        const timeout = setTimeout(() => {
+            if (i < spinner.length - 1) {
+                setI(i + 1);
+            } else {
+                setI(0);
+            }
+        }, 120);
+
+        return (): void => {
+            clearInterval(timeout);
+        };
     }, [i]);
 
     if (delay) {
