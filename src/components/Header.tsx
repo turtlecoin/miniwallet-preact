@@ -13,8 +13,8 @@ function Header(props: {
             method: "POST",
             credentials: "include",
         });
-        route("/login");
         props.setUser(null);
+        route("/login");
     };
 
     if (!props.user) {

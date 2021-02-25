@@ -37,38 +37,45 @@ function Login(props: { setUser: (user: User | null) => void }): h.JSX.Element {
             <div class="card aligner-item">
                 <div class="box container">
                     <h5 class="centered">Welcome to miniwallet</h5>
-                    <label>Username:</label>
-                    <input
-                        type="text"
-                        value={username}
-                        onInput={(event: any): void => {
-                            setUsername(event.target.value);
-                        }}
-                    />
-                    <label>Password: </label>
-                    <input
-                        type="password"
-                        value={password}
-                        onInput={(event: any): void => {
-                            setPassword(event.target.value);
-                        }}
-                    />
-                    <div class="buttons">
-                        <button
-                            class="button-ghost"
-                            href="/register"
-                            onClick={(): void => {
-                                route("/register");
+                    <form onSubmit={(event): void => {
+                        event.preventDefault();
+                        login();
+                    }}>
+                        <label>Username:</label>
+                        <input
+                            type="text"
+                            autoComplete="username"
+                            value={username}
+                            onInput={(event: any): void => {
+                                setUsername(event.target.value);
                             }}
-                        >
-                            Create account
-                        </button>
-                    </div>
-                    <div class="buttons right">
-                        <button className="button-primary" onClick={login}>
-                            Log In
-                        </button>
-                    </div>
+                        />
+                        <label>Password: </label>
+                        <input
+                            type="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onInput={(event: any): void => {
+                                setPassword(event.target.value);
+                            }}
+                        />
+                        <div class="buttons">
+                            <button
+                                class="button-ghost"
+                                href="/register"
+                                onClick={(): void => {
+                                    route("/register");
+                                }}
+                            >
+                                Create account
+                            </button>
+                        </div>
+                        <div class="buttons right">
+                            <button type="submit" className="button-primary">
+                                Log In
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="aligner-item aligner-item--bottom" />

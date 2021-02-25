@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { useState } from "preact/hooks";
@@ -43,18 +44,25 @@ export function Backup(props: { user: User | null }): h.JSX.Element {
             <h3>Backup</h3>
             {secrets.spendKey === "" && (
                 <div>
-                    <label>Enter Password:</label>
-                    <input
-                        value={password}
-                        onInput={(event: any): void => {
-                            setPassword(event.target.value);
-                        }}
-                        type="password"
-                        placeholder="hunter2"
-                    />
-                    <button type="button-primary" onClick={getSecrets}>
-                        Show Secrets
-                    </button>
+                    <form onSubmit={(event): void => {
+                        event.preventDefault();
+                        getSecrets();
+                    }}>
+                        <label>Enter Password:</label>
+                        <input autoComplete="username" class="hidden" />
+                        <input
+                            autoComplete={"current-password"}
+                            value={password}
+                            onInput={(event: any): void => {
+                                setPassword(event.target.value);
+                            }}
+                            type="password"
+                            placeholder="hunter2"
+                        />
+                        <button type="submit" class="button-primary">
+                            Show Secrets
+                        </button>
+                    </form>
                 </div>
             )}
             {secrets.spendKey !== "" && (

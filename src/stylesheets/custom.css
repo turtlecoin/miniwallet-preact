@@ -192,3 +192,7 @@ button.button-ghost:hover {
         width: 95%;
     }
 }
+
+.hidden {
+    display: none;
+}
