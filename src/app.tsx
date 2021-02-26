@@ -14,7 +14,6 @@ import Register from "./routes/Register";
 import Account from "./routes/Account";
 
 import { API_URI } from "./constants/config";
-import Backup from "./components/Backup";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -25,6 +24,7 @@ const App: FunctionalComponent = () => {
     const [transactions, setTransactions] = useState<Transaction[] | null>(
         null
     );
+    const [prices, setPrices] = useState<Record<string, number>>({});
 
     const reset = (): void => {
         setUser(null);
@@ -49,6 +49,22 @@ const App: FunctionalComponent = () => {
             }
         })();
     }, []);
+
+    useMemo(() => {
+        (async (): Promise<void> => {
+            if (user === null) {
+                return;
+            }
+            const res = await fetch(`${API_URI}/price`, {
+                credentials: "include",
+                method: "GET",
+            });
+
+            if (res.status === 200) {
+                setPrices(await res.json());
+            }
+        })();
+    }, [user]);
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -91,6 +107,7 @@ const App: FunctionalComponent = () => {
                     setUser={setUser}
                     user={user}
                     balance={balance}
+                    prices={prices}
                     path="/"
                 />
                 <Receive user={user} path="/receive" />

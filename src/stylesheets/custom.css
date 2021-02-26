@@ -25,6 +25,10 @@ table {
     width: 100%;
 }
 
+.tag {
+    font-size: 18px;
+}
+
 thead {
     font-weight: 600;
 }
@@ -35,6 +39,10 @@ tbody td {
 
 tbody tr:not(:last-child) {
     border-bottom: 1px solid #e1e1e1;
+}
+
+.fiat-balance {
+    margin-top: -20px;
 }
 
 input {
@@ -222,6 +230,14 @@ button.button-ghost:hover {
     color: #6852ac;
     z-index: -1;
     font-size: 180px;
+}
+
+.has-text-bold {
+    font-weight: 400;
+}
+
+.has-text-light {
+    font-weight: 200;
 }
 
 .has-text-right {

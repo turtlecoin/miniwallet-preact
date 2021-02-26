@@ -1,5 +1,10 @@
 // thanks to Z for this function: https://github.com/turtlecoin/turtlecoin-wallet-backend-js/blob/master/lib/Utilities.ts
-export function prettyPrintAmount(amount: number): string {
+
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function prettyPrintAmount(amount: number, ticker = true): string {
     /* Get the amount we need to divide atomic units by. 2 decimal places = 100 */
     const divisor: number = Math.pow(10, 2);
     const dollars: number =
@@ -13,8 +18,6 @@ export function prettyPrintAmount(amount: number): string {
         .padStart(2, "0");
 
     /* Makes our numbers thousand separated. https://stackoverflow.com/a/2901298/8737306 */
-    const formatted: string = dollars
-        .toString()
-        .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return `${formatted}.${cents} TRTL`;
+    const formatted: string = numberWithCommas(dollars);
+    return `${formatted}.${cents}${ticker ? " TRTL" : ""}`;
 }

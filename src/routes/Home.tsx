@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { h } from "preact";
 import { Transaction, User } from "../types";
-import { prettyPrintAmount } from "../utils/prettyPrintAmount";
+import {
+    numberWithCommas,
+    prettyPrintAmount,
+} from "../utils/prettyPrintAmount";
 import { Loader } from "../components/Loader";
 
 function Home(props: {
@@ -10,6 +13,7 @@ function Home(props: {
     setUser: (user: User | null) => void;
     balance: { unlocked: number; locked: number } | null;
     transactions: Transaction[] | null;
+    prices: Record<string, number>;
 }): h.JSX.Element {
     if (!props.user || props.transactions == null || props.balance == null) {
         return <Loader />;
@@ -28,16 +32,24 @@ function Home(props: {
                     on your account for added security.
                 </p>
             )}
-            <label>@{props.user.username}</label>
             <div class="balance">
-                <h4>{prettyPrintAmount(total)}</h4>
-                {props.balance.unlocked < total && (
+                <h4 class="has-text-bold">{prettyPrintAmount(total)}</h4>
+                {props.balance.locked > 0 && (
                     <p class="alert info fullwidth">
                         🛈 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
                         locked
                     </p>
                 )}
             </div>
+            <h6 class="fiat-balance">
+                {numberWithCommas(
+                    Number(
+                        (props.prices["turtlecoin"] * (total / 100)).toFixed(2)
+                    )
+                )}{" "}
+                USD
+            </h6>
+
             {props.transactions.length > 0 && (
                 <div>
                     <table>
