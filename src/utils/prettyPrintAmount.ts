@@ -1,6 +1,6 @@
 // thanks to Z for this function: https://github.com/turtlecoin/turtlecoin-wallet-backend-js/blob/master/lib/Utilities.ts
 
-export function numberWithCommas(x) {
+export function numberWithCommas(x: number): string {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
