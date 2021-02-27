@@ -56,7 +56,7 @@ function Header(props: {
                                         Account
                                     </Link>
                                 </li>
-                                <li>
+                                <li class="desktop-only">
                                     <Link onClick={logout} href="#">
                                         Logout
                                     </Link>

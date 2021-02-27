@@ -52,29 +52,59 @@ function Home(props: {
 
             {props.transactions.length > 0 && (
                 <div>
-                    <table>
+                    <table style={{ width: "100%" }}>
                         <thead>
-                            <tr>
-                                <td>Height</td>
-                                <td class="desktop-only">Hash</td>
-                                <td class="has-text-right">Amount</td>
+                            <tr style={{ backgroundColor: "#F5F5F5" }}>
+                                <td style={{ paddingLeft: "20px" }}>
+                                    Transactions
+                                </td>
+                                <td style={{ paddingRight: "20px" }} />
                             </tr>
                         </thead>
                         <tbody>
                             {props.transactions.map((tx) => (
                                 <tr key={tx.hash}>
-                                    <td>{tx.blockHeight}</td>
-                                    <td class="monospace desktop-only">
+                                    <td
+                                        class="monospace"
+                                        style={{ paddingLeft: "20px" }}
+                                    >
                                         <a
+                                            class="black-link"
                                             href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
                                             target="_blank"
                                             rel="noreferrer"
                                         >
-                                            {tx.hash}
+                                            {`${tx.hash.slice(
+                                                0,
+                                                6
+                                            )}…${tx.hash.slice(
+                                                tx.hash.length - 6,
+                                                tx.hash.length
+                                            )}`}
                                         </a>
                                     </td>
-                                    <td class="has-text-right">
-                                        {prettyPrintAmount(tx.amount)}
+                                    <td
+                                        class="has-text-right"
+                                        style={{ paddingRight: "20px" }}
+                                    >
+                                        {tx.amount < 0 && (
+                                            <span style={{ color: "#831414" }}>
+                                                {prettyPrintAmount(tx.amount)}
+                                            </span>
+                                        )}
+                                        {tx.amount > 0 && (
+                                            <span style={{ color: "#43b380" }}>
+                                                +{prettyPrintAmount(tx.amount)}
+                                            </span>
+                                        )}
+                                        <br />
+                                        <span>
+                                            {tx.timestamp
+                                                ? new Date(
+                                                      tx.timestamp * 1000
+                                                  ).toLocaleDateString()
+                                                : "Pending"}
+                                        </span>
                                     </td>
                                 </tr>
                             ))}

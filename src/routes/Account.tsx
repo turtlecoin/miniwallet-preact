@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
-import { useState } from "preact/hooks";
+import { useMemo, useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
@@ -28,7 +28,13 @@ export function Account(props: {
     const [disenrollPw, setDisenrollPw] = useState("");
     const [disenrollToken, setDisenrollToken] = useState("");
 
+    const [disabling2FA, setDisabling2FA] = useState(false);
+
     const { page } = props.matches as { page?: string };
+
+    useMemo(() => {
+        setDisabling2FA(false);
+    }, [page]);
 
     if (page === ":page") {
         route("/account/password", true);
@@ -149,6 +155,9 @@ export function Account(props: {
                             Backup
                         </Link>
                     </li>
+                    <li>
+                        <Link>Log Out</Link>
+                    </li>
                 </ul>
 
                 {(page === "" || page === "password") && (
@@ -207,45 +216,60 @@ export function Account(props: {
                         {props.user?.twoFactor && (
                             <div>
                                 <h5>✓ 2FA Enabled</h5>
-                                <form
-                                    onSubmit={(event) => {
-                                        event.preventDefault();
-                                        disenroll2FAKey();
-                                    }}
-                                >
-                                    <label>Password</label>
-                                    <input
-                                        value={disenrollPw}
-                                        onInput={(event: any) => {
-                                            setDisenrollPw(event.target.value);
+                                {disabling2FA && (
+                                    <form
+                                        onSubmit={(event) => {
+                                            event.preventDefault();
+                                            disenroll2FAKey();
                                         }}
-                                        type="password"
-                                        autoComplete="current-password"
-                                    />
-                                    <label>2FA Code</label>
-                                    <input
-                                        value={disenrollToken}
-                                        onInput={(event: any) => {
-                                            setDisenrollToken(
-                                                event.target.value
-                                            );
-                                        }}
-                                        type="number"
-                                    />
-                                    <button
-                                        type="submit"
-                                        class="button-primary"
                                     >
-                                        Disable 2FA
+                                        <label>Password</label>
+                                        <input
+                                            value={disenrollPw}
+                                            onInput={(event: any) => {
+                                                setDisenrollPw(
+                                                    event.target.value
+                                                );
+                                            }}
+                                            type="password"
+                                            autoComplete="current-password"
+                                        />
+                                        <label>2FA Code</label>
+                                        <input
+                                            value={disenrollToken}
+                                            onInput={(event: any) => {
+                                                setDisenrollToken(
+                                                    event.target.value
+                                                );
+                                            }}
+                                            type="number"
+                                        />
+                                        <button
+                                            type="submit"
+                                            class="button-primary"
+                                        >
+                                            Disable 2FA
+                                        </button>
+                                    </form>
+                                )}
+                                {!disabling2FA && (
+                                    <button
+                                        class="button-primary"
+                                        onClick={() => setDisabling2FA(true)}
+                                    >
+                                        Click to Disable
                                     </button>
-                                </form>
+                                )}
                             </div>
                         )}
                         {!props.user?.twoFactor && (
                             <div>
                                 <h5>Enable 2FA</h5>
                                 {!qrData && (
-                                    <button onClick={get2FAKey}>
+                                    <button
+                                        class="button-primary"
+                                        onClick={get2FAKey}
+                                    >
                                         Get Code
                                     </button>
                                 )}

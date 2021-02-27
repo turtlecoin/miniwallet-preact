@@ -102,34 +102,40 @@ const App: FunctionalComponent = () => {
     return (
         <div class="app">
             <div class="content">
-            <Header user={user} setUser={setUser} reset={reset} />
-            <Router>
-                <Home
-                    transactions={transactions}
-                    setUser={setUser}
-                    user={user}
-                    balance={balance}
-                    prices={prices}
-                    path="/"
-                />
-                <Receive user={user} path="/receive" />
-                <Send
-                    transactions={transactions}
-                    setTransactions={setTransactions}
-                    path="/send"
-                />
-                <Login setUser={setUser} path="/login" />
-                <Register setUser={setUser} path="/register" />
-                <Account path="/account/:page?" setUser={setUser} user={user} />
-                <PrivacyPolicy path="/privacy-policy" />
-                <NotFoundPage default />
-            </Router>
+                <Header user={user} setUser={setUser} reset={reset} />
+                <Router>
+                    <Home
+                        transactions={transactions}
+                        setUser={setUser}
+                        user={user}
+                        balance={balance}
+                        prices={prices}
+                        path="/"
+                    />
+                    <Receive user={user} path="/receive" />
+                    <Send
+                        transactions={transactions}
+                        setTransactions={setTransactions}
+                        path="/send"
+                    />
+                    <Login setUser={setUser} path="/login" />
+                    <Register setUser={setUser} path="/register" />
+                    <Account
+                        path="/account/:page?"
+                        setUser={setUser}
+                        user={user}
+                    />
+                    <PrivacyPolicy path="/privacy-policy" />
+                    <NotFoundPage default />
+                </Router>
             </div>
             <footer>
                 <div class="container footer-container">
                     <ul>
                         <li>Copyright 2020 LogicBite LLC</li>
-                        <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                        <li>
+                            <Link href="/privacy-policy">Privacy Policy</Link>
+                        </li>
                     </ul>
                 </div>
             </footer>
