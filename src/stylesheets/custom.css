@@ -93,11 +93,11 @@ pre {
     border: 1px solid rgba(110, 117, 130, 0.2);
     border-radius: 3px;
     margin-top: 2rem;
-    height: calc(100vh - 10rem);
+    min-height: calc(100vh - 10rem);
 }
 
 .card.no-menu {
-    height: calc(100vh - 15rem);
+    min-height: calc(100vh - 15rem);
     margin-bottom: 2rem;
 }
 
@@ -252,10 +252,10 @@ button.button-ghost:hover {
     .card {
         width: 100vw;
         margin-top: 0rem;
-        height: calc(100vh - 44px);
+        min-height: calc(100vh - 44px);
     }
     .card.no-menu {
-        height: 100vh;
+        min-height: 100vh;
         margin-top: -44px;
     }
 }
