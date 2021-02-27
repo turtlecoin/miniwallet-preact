@@ -96,6 +96,11 @@ pre {
     height: calc(100vh - 10rem);
 }
 
+.card.no-menu {
+    height: calc(100vh - 15rem);
+    margin-bottom: 2rem;
+}
+
 .navbar {
     z-index: 1;
     position: absolute;
@@ -231,7 +236,6 @@ button.button-ghost:hover {
 }
 
 .box {
-    width: 80vw;
     margin: auto;
 }
 
@@ -249,6 +253,10 @@ button.button-ghost:hover {
         width: 100vw;
         margin-top: 0rem;
         height: calc(100vh - 44px);
+    }
+    .card.no-menu {
+        height: 100vh;
+        margin-top: -44px;
     }
 }
 
