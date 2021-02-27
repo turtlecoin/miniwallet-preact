@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FunctionalComponent, h } from "preact";
-import { Route, Router, route } from "preact-router";
+import { Router, route, Link } from "preact-router";
 
 import Home from "./routes/Home";
 import NotFoundPage from "./routes/404";
@@ -14,6 +14,7 @@ import Register from "./routes/Register";
 import Account from "./routes/Account";
 
 import { API_URI } from "./constants/config";
+import PrivacyPolicy from "./routes/PrivacyPolicy";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -100,6 +101,7 @@ const App: FunctionalComponent = () => {
 
     return (
         <div class="app">
+            <div class="content">
             <Header user={user} setUser={setUser} reset={reset} />
             <Router>
                 <Home
@@ -119,8 +121,18 @@ const App: FunctionalComponent = () => {
                 <Login setUser={setUser} path="/login" />
                 <Register setUser={setUser} path="/register" />
                 <Account path="/account/:page?" setUser={setUser} user={user} />
+                <PrivacyPolicy path="/privacy-policy" />
                 <NotFoundPage default />
             </Router>
+            </div>
+            <footer>
+                <div class="container footer-container">
+                    <ul>
+                        <li>Copyright 2020 LogicBite LLC</li>
+                        <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
     );
 };
