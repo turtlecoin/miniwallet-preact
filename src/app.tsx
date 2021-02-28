@@ -132,12 +132,14 @@ const App: FunctionalComponent = () => {
             </div>
             <footer>
                 <div class="container footer-container">
-                    <ul>
-                        <li>Copyright 2020 LogicBite LLC</li>
-                        <li>
-                            <Link href="/privacy-policy">Privacy Policy</Link>
-                        </li>
-                    </ul>
+                    <div class="pinched">
+                        <ul>
+                            <li>Copyright 2020 LogicBite LLC</li>
+                            <li>
+                                <Link href="/privacy-policy">Privacy Policy</Link>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </footer>
         </div>
