@@ -124,6 +124,7 @@ const App: FunctionalComponent = () => {
                         path="/account/:page?"
                         setUser={setUser}
                         user={user}
+                        reset={reset}
                     />
                     <PrivacyPolicy path="/privacy-policy" />
                     <NotFoundPage default />

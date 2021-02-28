@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { useMemo, useState } from "preact/hooks";
@@ -5,7 +6,7 @@ import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
 import Backup from "../components/Backup";
-import { Router, Route, Link, route } from "preact-router";
+import { Link, route } from "preact-router";
 
 interface TOTPRes {
     secret: string;
@@ -13,10 +14,12 @@ interface TOTPRes {
 }
 
 export function Account(props: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     matches?: Record<string, any>;
     setUser: (user: User | null) => void;
     user: User | null;
     path: string;
+    reset: () => void;
 }): h.JSX.Element {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -34,6 +37,7 @@ export function Account(props: {
 
     useMemo(() => {
         setDisabling2FA(false);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page]);
 
     if (page === ":page") {
@@ -125,7 +129,7 @@ export function Account(props: {
 
     return (
         <div class="card container">
-            <div>
+            <div class="pinched">
                 <ul class="tabs">
                     <li>
                         <Link
@@ -155,8 +159,15 @@ export function Account(props: {
                             Backup
                         </Link>
                     </li>
-                    <li>
-                        <Link>Log Out</Link>
+                    <li class="mobile-only">
+                        <Link
+                            href="/login"
+                            onClick={(): void => {
+                                props.reset();
+                            }}
+                        >
+                            Log Out
+                        </Link>
                     </li>
                 </ul>
 
@@ -218,7 +229,7 @@ export function Account(props: {
                                 <h5>✓ 2FA Enabled</h5>
                                 {disabling2FA && (
                                     <form
-                                        onSubmit={(event) => {
+                                        onSubmit={(event): void => {
                                             event.preventDefault();
                                             disenroll2FAKey();
                                         }}
@@ -226,7 +237,7 @@ export function Account(props: {
                                         <label>Password</label>
                                         <input
                                             value={disenrollPw}
-                                            onInput={(event: any) => {
+                                            onInput={(event: any): void => {
                                                 setDisenrollPw(
                                                     event.target.value
                                                 );
@@ -237,7 +248,7 @@ export function Account(props: {
                                         <label>2FA Code</label>
                                         <input
                                             value={disenrollToken}
-                                            onInput={(event: any) => {
+                                            onInput={(event: any): void => {
                                                 setDisenrollToken(
                                                     event.target.value
                                                 );
@@ -255,7 +266,9 @@ export function Account(props: {
                                 {!disabling2FA && (
                                     <button
                                         class="button-primary"
-                                        onClick={() => setDisabling2FA(true)}
+                                        onClick={(): void =>
+                                            setDisabling2FA(true)
+                                        }
                                     >
                                         Click to Disable
                                     </button>
@@ -286,7 +299,7 @@ export function Account(props: {
                                         <p class="monospace">{qrData.secret}</p>
                                         <label>Enter Code:</label>
                                         <form
-                                            onSubmit={(event) => {
+                                            onSubmit={(event): void => {
                                                 event.preventDefault();
                                                 enroll2FAKey();
                                             }}
@@ -294,7 +307,7 @@ export function Account(props: {
                                             <input
                                                 value={token}
                                                 type="number"
-                                                onInput={(event: any) => {
+                                                onInput={(event: any): void => {
                                                     setToken(
                                                         event.target.value
                                                     );

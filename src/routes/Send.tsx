@@ -61,51 +61,53 @@ export function Send(props: {
 
     return (
         <div class="card container">
-            <label>Amount:</label>
-            <form
-                onSubmit={(event): void => {
-                    event.preventDefault();
-                    submitSend();
-                }}
-            >
-                <input
-                    type="number"
-                    value={amount}
-                    onInput={(event: any): void => {
-                        setAmount(event.target.value);
+            <div class="pinched">
+                <label>Amount:</label>
+                <form
+                    onSubmit={(event): void => {
+                        event.preventDefault();
+                        submitSend();
                     }}
-                    placeholder="0.00"
-                />
-                <label>Address:</label>
-                <input
-                    type="text"
-                    className="input"
-                    placeholder="TRTL…3Xf"
-                    value={address}
-                    onInput={(event: any): void => {
-                        setAddress(event.target.value);
-                    }}
-                />
-                <label>PaymentID:</label>
-                <input
-                    type="text"
-                    className="input"
-                    placeholder="Optional"
-                    value={paymentID}
-                    onInput={(event: any): void => {
-                        setPaymentID(event.target.value);
-                    }}
-                />
-                <div class="buttons right">
-                    <button
-                        type="submit"
-                        class="button-primary"
-                        disabled={submitting}
-                    >
-                        Send
-                    </button>
-                </div>
-            </form>
+                >
+                    <input
+                        type="number"
+                        value={amount}
+                        onInput={(event: any): void => {
+                            setAmount(event.target.value);
+                        }}
+                        placeholder="0.00"
+                    />
+                    <label>Address:</label>
+                    <input
+                        type="text"
+                        className="input"
+                        placeholder="TRTL…3Xf"
+                        value={address}
+                        onInput={(event: any): void => {
+                            setAddress(event.target.value);
+                        }}
+                    />
+                    <label>PaymentID:</label>
+                    <input
+                        type="text"
+                        className="input"
+                        placeholder="Optional"
+                        value={paymentID}
+                        onInput={(event: any): void => {
+                            setPaymentID(event.target.value);
+                        }}
+                    />
+                    <div class="buttons right">
+                        <button
+                            type="submit"
+                            class="button-primary"
+                            disabled={submitting}
+                        >
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 }

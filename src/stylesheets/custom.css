@@ -1,3 +1,7 @@
+html {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
 body {
     padding-top: 44px;
     height: 100%;
@@ -6,6 +10,11 @@ body {
     display: flex;
     flex-direction: column;
     overflow: scroll;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .app {
@@ -13,6 +22,8 @@ body {
     flex-direction: column;
     width: 100vw;
     height: 100vh;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 .content {
@@ -89,11 +100,11 @@ pre {
 .card {
     z-index: 2;
     background-color: #fff;
-    padding: 1.5rem 2rem;
     border: 1px solid rgba(110, 117, 130, 0.2);
     border-radius: 3px;
-    margin-top: 2rem;
     min-height: calc(100vh - 10rem);
+    margin-top: 2rem;
+    padding-top: 1.25rem;
 }
 
 .card.no-menu {
@@ -109,16 +120,26 @@ pre {
     background-color: #43b380;
 }
 
+tbody:nth-child(2) {
+    background-color: "#F5F5F5";
+}
+
+table {
+    margin-bottom: 0px;
+}
+
 .navbar > div > li {
     list-style-type: none;
     box-sizing: inherit;
     float: left;
     margin-bottom: 0rem;
-    padding: 5px;
+    padding: 5px 0px;
+    margin-right: 1rem;
 }
 
 .navbar > div > li:last-child {
     float: right;
+    margin-right: 0rem;
 }
 
 .navbar > div > li > a:hover {
@@ -155,10 +176,11 @@ pre {
 }
 
 .alert {
-    margin-top: 0.5rem;
+    margin: auto;
     padding: 0.5rem 1rem;
     display: inline-block;
     border-radius: 3px;
+    margin-bottom: 1rem;
 }
 
 .alert.info {
@@ -248,16 +270,49 @@ button.button-ghost:hover {
     text-align: center;
 }
 
+.pinched {
+    width: 95%;
+    margin: auto;
+}
+
+@media (min-width: 751px) {
+    .mobile-only {
+        display: none !important;
+    }
+}
+
 @media (max-width: 750px) {
+    .nav-container {
+        margin-left: 2.5%;
+    }
     .card {
-        width: 100vw;
         margin-top: 0rem;
+        width: 100vw;
+        padding: 1.5rem 0rem;
         min-height: calc(100vh - 44px);
     }
     .card.no-menu {
         min-height: 100vh;
         margin-top: -44px;
     }
+
+    .container {
+        width: 100%;
+    }
+}
+
+.right-buttons {
+    margin-right: 0.5rem;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 2.5%;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 2.5%;
 }
 
 .hidden {
@@ -301,15 +356,15 @@ button.button-ghost:hover {
 
 .tabs {
     list-style: none;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
     margin-left: 0px;
 }
 
 .tabs > li {
     display: inline-block;
     text-align: center;
-    padding: 0rem 1rem;
+    padding: 0rem 0rem;
+    margin-right: 2rem;
 }
 
 .tabs > li > a {

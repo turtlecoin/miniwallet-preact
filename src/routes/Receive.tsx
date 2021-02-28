@@ -16,7 +16,7 @@ export function Receive(props: {
 
     return (
         <div class="card container">
-            <div>
+            <div class="pinched">
                 <label>Address:</label>
                 <pre>
                     <code>{props.user?.address}</code>

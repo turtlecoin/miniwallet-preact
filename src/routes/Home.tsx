@@ -24,50 +24,55 @@ function Home(props: {
     return (
         <div class="card container">
             {!props.user.twoFactor && (
-                <p class="alert danger">
-                    ⚠ Consider enabling{" "}
-                    <a class="has-text-info" href="/account/2fa">
-                        2FA
-                    </a>{" "}
-                    on your account for added security.
-                </p>
-            )}
-            <div class="balance">
-                <h4 class="has-text-bold">{prettyPrintAmount(total)}</h4>
-                {props.balance.locked > 0 && (
-                    <p class="alert info fullwidth">
-                        🛈 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
-                        locked
+                <div class="pinched">
+                    <p class="alert danger">
+                        ⚠ Consider enabling{" "}
+                        <a class="has-text-info" href="/account/2fa">
+                            2FA
+                        </a>{" "}
+                        on your account for added security.
                     </p>
-                )}
+                </div>
+            )}
+            <div class="pinched">
+                <div class="balance">
+                    <h4 class="has-text-bold">{prettyPrintAmount(total)}</h4>
+                    {props.balance.locked > 0 && (
+                        <p class="alert info fullwidth">
+                            🛈{" "}
+                            {prettyPrintAmount(total - props.balance.unlocked)}{" "}
+                            locked
+                        </p>
+                    )}
+                </div>
+                <h6 class="fiat-balance">
+                    {numberWithCommas(
+                        Number(
+                            (
+                                props.prices["turtlecoin"] *
+                                (total / 100)
+                            ).toFixed(2)
+                        )
+                    )}{" "}
+                    USD
+                </h6>
             </div>
-            <h6 class="fiat-balance">
-                {numberWithCommas(
-                    Number(
-                        (props.prices["turtlecoin"] * (total / 100)).toFixed(2)
-                    )
-                )}{" "}
-                USD
-            </h6>
-
             {props.transactions.length > 0 && (
                 <div>
                     <table style={{ width: "100%" }}>
                         <thead>
-                            <tr style={{ backgroundColor: "#F5F5F5" }}>
-                                <td style={{ paddingLeft: "20px" }}>
-                                    Transactions
-                                </td>
-                                <td style={{ paddingRight: "20px" }} />
+                            <tr
+                                class="tx-table-row"
+                                style={{ backgroundColor: "#F5F5F5" }}
+                            >
+                                <td>Transactions</td>
+                                <td />
                             </tr>
                         </thead>
                         <tbody>
                             {props.transactions.map((tx) => (
-                                <tr key={tx.hash}>
-                                    <td
-                                        class="monospace"
-                                        style={{ paddingLeft: "20px" }}
-                                    >
+                                <tr class="tx-table-row" key={tx.hash}>
+                                    <td class="monospace">
                                         <a
                                             class="black-link"
                                             href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
@@ -83,10 +88,7 @@ function Home(props: {
                                             )}`}
                                         </a>
                                     </td>
-                                    <td
-                                        class="has-text-right"
-                                        style={{ paddingRight: "20px" }}
-                                    >
+                                    <td class="has-text-right">
                                         {tx.amount < 0 && (
                                             <span style={{ color: "#831414" }}>
                                                 {prettyPrintAmount(tx.amount)}

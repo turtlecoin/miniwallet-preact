@@ -47,73 +47,79 @@ function Login(props: {
 
     return (
         <div class="card container no-menu">
-            {collect2FA && (
-                <div class="box">
-                    <h6>Welcome @{username}</h6>
-                    <form
-                        onSubmit={(event) => {
-                            event.preventDefault();
-                            login();
-                        }}
-                    >
-                        <label>2FA Code:</label>
-                        <input
-                            value={totp}
-                            onInput={(event: any): void => {
-                                setTOTP(event.target.value);
+            <div class="pinched">
+                {collect2FA && (
+                    <div class="box">
+                        <h6>Welcome @{username}</h6>
+                        <form
+                            onSubmit={(event): void => {
+                                event.preventDefault();
+                                login();
                             }}
-                            type="number"
-                        />
-                        <div class="buttons right">
-                            <button className="button-primary">Log In</button>
-                        </div>
-                    </form>
-                </div>
-            )}
-            {!collect2FA && (
-                <div class="box">
-                    <h5 class="centered">Welcome to miniwallet</h5>
-                    <form
-                        onSubmit={(event): void => {
-                            event.preventDefault();
-                            login();
-                        }}
-                    >
-                        <label>Username:</label>
-                        <input
-                            type="text"
-                            autoComplete="username"
-                            value={username}
-                            onInput={(event: any): void => {
-                                setUsername(event.target.value);
-                            }}
-                        />
-                        <label>Password: </label>
-                        <input
-                            type="password"
-                            autoComplete="current-password"
-                            value={password}
-                            onInput={(event: any): void => {
-                                setPassword(event.target.value);
-                            }}
-                        />
-                        <div class="buttons right">
-                            <button className="button-primary">Log In</button>
-                        </div>
-                        <div class="buttons">
-                            <button
-                                class="button-ghost"
-                                href="/register"
-                                onClick={(): void => {
-                                    route("/register");
+                        >
+                            <label>2FA Code:</label>
+                            <input
+                                value={totp}
+                                onInput={(event: any): void => {
+                                    setTOTP(event.target.value);
                                 }}
-                            >
-                                Create account
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            )}
+                                type="number"
+                            />
+                            <div class="buttons right">
+                                <button className="button-primary">
+                                    Log In
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+                {!collect2FA && (
+                    <div class="box">
+                        <h5 class="centered">Welcome to miniwallet</h5>
+                        <form
+                            onSubmit={(event): void => {
+                                event.preventDefault();
+                                login();
+                            }}
+                        >
+                            <label>Username:</label>
+                            <input
+                                type="text"
+                                autoComplete="username"
+                                value={username}
+                                onInput={(event: any): void => {
+                                    setUsername(event.target.value);
+                                }}
+                            />
+                            <label>Password: </label>
+                            <input
+                                type="password"
+                                autoComplete="current-password"
+                                value={password}
+                                onInput={(event: any): void => {
+                                    setPassword(event.target.value);
+                                }}
+                            />
+                            <div class="buttons right">
+                                <button className="button-primary">
+                                    Log In
+                                </button>
+                            </div>
+                            <div class="buttons">
+                                <button
+                                    class="button-ghost"
+                                    href="/register"
+                                    onClick={(): void => {
+                                        route("/register");
+                                    }}
+                                >
+                                    Create account
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

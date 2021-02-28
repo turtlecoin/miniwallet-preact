@@ -1,5 +1,5 @@
 import { Fragment, h } from "preact";
-import { Link, LinkProps } from "preact-router/match";
+import { Link } from "preact-router/match";
 import { User } from "../types";
 import { route } from "preact-router";
 import { API_URI } from "../constants/config";
@@ -27,7 +27,7 @@ function Header(props: {
         <header>
             <nav class="">
                 <ul class="horizontal gray navbar">
-                    <div class="container">
+                    <div class="container nav-container">
                         <li>
                             <Link href="/" activeClassName="active">
                                 Home
@@ -56,7 +56,7 @@ function Header(props: {
                                         Account
                                     </Link>
                                 </li>
-                                <li class="desktop-only">
+                                <li class="desktop-only right-buttons">
                                     <Link onClick={logout} href="#">
                                         Logout
                                     </Link>

@@ -4,7 +4,7 @@
     "version": "v0.1.0",
     "license": "AGPL-3.0",
     "scripts": {
-        "format": "npx prettier . --write --tab-width 4",
+        "format": "npx prettier . --write --tab-width 4 --ignore-path .gitignore",
         "prebuild": "node ./scripts/prebuild.js",
         "build": "preact build",
         "serve": "sirv build --port 8080 --cors --single",
