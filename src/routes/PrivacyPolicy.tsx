@@ -29,45 +29,51 @@ export function PrivacyPolicy({ path }: { path: string }): h.JSX.Element {
 
     return (
         <div class="card container">
-            {privacyPolicyMd.split("\n").map((line, index) => {
-                if (line.trim() == "") {
-                    return <span key={index} />;
-                }
-                if (line.startsWith("##")) {
-                    return <h5 key={index}>{line.replace("##", "").trim()}</h5>;
-                }
-                if (line.startsWith("#")) {
-                    return <h3 key={index}>{line.replace("#", "").trim()}</h3>;
-                }
-                return <p key={index}>{line}</p>;
-            })}
+            <div class="pinched">
+                {privacyPolicyMd.split("\n").map((line, index) => {
+                    if (line.trim() == "") {
+                        return <span key={index} />;
+                    }
+                    if (line.startsWith("##")) {
+                        return (
+                            <h5 key={index}>{line.replace("##", "").trim()}</h5>
+                        );
+                    }
+                    if (line.startsWith("#")) {
+                        return (
+                            <h3 key={index}>{line.replace("#", "").trim()}</h3>
+                        );
+                    }
+                    return <p key={index}>{line}</p>;
+                })}
 
-            <h5>Update History</h5>
-            <ul>
-                {commitHistory.map((commit) => (
-                    <li>
-                        {new Date(
-                            commit.commit.author.date
-                        ).toLocaleDateString()}
-                        : {commit.commit.message}{" "}
-                        <a
-                            target="_blank"
-                            rel="noreferrer"
-                            href={commit.html_url}
-                        >
-                            view diff
-                        </a>
-                    </li>
-                ))}
-            </ul>
-            <a
-                className="help"
-                target="_blank"
-                rel="noreferrer"
-                href="https://github.com/logicbite/miniwallet-privacy-policy/commits/master"
-            >
-                complete change history
-            </a>
+                <h5>Update History</h5>
+                <ul>
+                    {commitHistory.map((commit) => (
+                        <li>
+                            {new Date(
+                                commit.commit.author.date
+                            ).toLocaleDateString()}
+                            : {commit.commit.message}{" "}
+                            <a
+                                target="_blank"
+                                rel="noreferrer"
+                                href={commit.html_url}
+                            >
+                                view diff
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <a
+                    className="help"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://github.com/logicbite/miniwallet-privacy-policy/commits/master"
+                >
+                    complete change history
+                </a>
+            </div>
         </div>
     );
 }
