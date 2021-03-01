@@ -411,6 +411,8 @@ td:last-child {
 
 .tabs {
     list-style: none;
+    width: 100%;
+    display: block;
 }
 
 .tabs > h4 {
@@ -419,11 +421,11 @@ td:last-child {
 
 .tabs > li {
     border-bottom: 1px solid #e1e1e1;
+    position: relative;
     display: block;
     text-align: left;
     padding: 24px 2.5%;
     margin: 0rem 0rem;
-    width: 100%;
 }
 
 .tabs > .heading {
