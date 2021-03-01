@@ -428,6 +428,10 @@ td:last-child {
     margin: 0rem 0rem;
 }
 
+.tabs > li:last-of-type {
+    border-bottom: none;
+}
+
 .tabs > .heading {
     background-color: #f5f5f5;
     padding: 12px 2.5%;
