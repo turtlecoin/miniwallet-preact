@@ -115,7 +115,9 @@ function Home(props: {
                 </div>
             )}
             {props.transactions.length === 0 && (
-                <p>You don't have any transactions yet!</p>
+                <div class="pinched">
+                    <p>You don't have any transactions yet!</p>
+                </div>
             )}
         </div>
     );
