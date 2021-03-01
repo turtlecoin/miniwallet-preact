@@ -50,7 +50,12 @@ const App: FunctionalComponent = () => {
             return;
         }
 
-        const ws = new WebSocket("wss://trtl.co.in/api/socket");
+        // hacky but i don't want to touch the config file
+        const socketUrl = `${API_URI.includes("https") ? "wss://" : "ws://"}${
+            API_URI.split("//")[1]
+        }/socket`;
+
+        const ws = new WebSocket(socketUrl);
 
         let pingTimeout = setTimeout(() => ws.close(), 10000 + 1000);
         const heartbeat = (): void => {
