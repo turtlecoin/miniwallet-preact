@@ -75,8 +75,12 @@ tbody tr:not(:last-child) {
     border-bottom: 1px solid #e1e1e1;
 }
 
+.subtitle {
+    margin-top: -2rem;
+}
+
 .fiat-balance {
-    margin-top: -20px;
+    margin-top: -2rem;
 }
 
 input {
@@ -410,21 +414,21 @@ td:last-child {
 }
 
 .tabs > h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
 }
 
 .tabs > li {
     border-bottom: 1px solid #e1e1e1;
     display: block;
     text-align: left;
-    padding: 1.25rem 2rem;
+    padding: 2rem 2.5%;
     margin: 0rem 0rem;
     width: 100%;
 }
 
 .tabs > .heading {
     background-color: #f5f5f5;
-    padding: 1rem 2.4rem;
+    padding: 1.5rem 2.5%;
     font-weight: bold;
 }
 
@@ -436,7 +440,6 @@ td:last-child {
     color: #3c78d8;
     display: block;
     width: 100%;
-    padding: 0.5rem;
     border-radius: 3px;
 }
 

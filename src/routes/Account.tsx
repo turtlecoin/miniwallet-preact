@@ -33,7 +33,10 @@ export function Account(props: {
             <div>
                 {page === "" && (
                     <ul class="tabs">
-                        <h4 class="pinched account-title">My Account</h4>
+                        <div class="pinched">
+                            <h4 class=" has-text-bold">My Account</h4>
+                            <h6 class="subtitle">Profile and Settings</h6>
+                        </div>
                         <li class="heading">Security</li>
                         <li>
                             <Link href={"/account/password"}>
