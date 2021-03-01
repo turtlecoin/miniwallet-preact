@@ -25,6 +25,26 @@ function Home(props: {
 
     return (
         <div class="card container">
+            <div class="right-tags">
+                {props.deadSocket && (
+                    <p class="alert danger">
+                        <span class="icon small">🔴</span>Disconnected
+                    </p>
+                )}
+                {props.syncData.daemon - props.syncData.wallet > 2 && (
+                    <p class="alert warning">
+                        <span class="icon small">🟡</span>Synchronizing:{" "}
+                        {props.syncData.daemon - props.syncData.wallet}{" "}
+                        {props.syncData.wallet}/{props.syncData.daemon}
+                    </p>
+                )}
+                {props.balance.locked == 0 && (
+                    <p class="alert info fullwidth">
+                        🔒 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
+                        locked
+                    </p>
+                )}
+            </div>
             {!props.user.twoFactor && (
                 <div class="pinched">
                     <p class="alert danger">
@@ -39,19 +59,10 @@ function Home(props: {
             <div class="pinched">
                 <div class="balance">
                     <h4 class="has-text-bold">
-                        <span class="icon">🐢</span>
                         {prettyPrintAmount(total, true)}
                     </h4>
-                    {props.balance.locked > 0 && (
-                        <p class="alert info fullwidth">
-                            🔒{" "}
-                            {prettyPrintAmount(total - props.balance.unlocked)}{" "}
-                            locked
-                        </p>
-                    )}
                 </div>
                 <h6 class="fiat-balance">
-                    <span class="icon small">💵</span>
                     {numberWithCommas(
                         Number(
                             (
@@ -62,21 +73,6 @@ function Home(props: {
                     )}{" "}
                     USD
                 </h6>
-                {props.deadSocket && (
-                    <p class="network-status">
-                        <span class="icon small">🔴</span>Disconnected
-                    </p>
-                )}
-                {!props.deadSocket &&
-                    (props.syncData.daemon - 2 <= props.syncData.wallet ? (
-                        <p class="network-status">
-                            <span class="icon small">🟢</span>Network OK
-                        </p>
-                    ) : (
-                        <p class="network-status">
-                            <span class="icon small">🟡</span>Synchronizing
-                        </p>
-                    ))}
             </div>
             {props.transactions.length > 0 && (
                 <div>

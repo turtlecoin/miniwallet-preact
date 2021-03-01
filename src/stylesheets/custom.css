@@ -198,6 +198,12 @@ table {
     color: #831414;
 }
 
+.alert.warning {
+    background-color: #fce8d2;
+    border: 1px solid #f6b26b;
+    color: #6f4703;
+}
+
 .alert.full-width {
     width: 100%;
 }
@@ -280,11 +286,11 @@ button.button-ghost:hover {
 }
 
 .icon {
-	align-items: center;
-	display: inline-flex;
-	justify-content: center;
-	height: 1.5rem;
-	width: 1.5rem;
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
     margin-right: 1.5rem;
 }
 
@@ -318,6 +324,19 @@ button.button-ghost:hover {
     .container {
         width: 100%;
     }
+}
+
+.right-tags {
+    float: right;
+    margin-right: 2rem;
+}
+
+.right-tags > p {
+    margin-left: 1rem;
+}
+
+.right-tags:last-child {
+    margin-right: 1rem;
 }
 
 .right-buttons {

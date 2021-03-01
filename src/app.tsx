@@ -70,7 +70,7 @@ const App: FunctionalComponent = () => {
         };
 
         ws.onclose = (): void => {
-            setDeadSocket(true);
+            setTimeout(() => setDeadSocket(true), 1000);
             if (pingTimeout) {
                 clearTimeout(pingTimeout);
             }
