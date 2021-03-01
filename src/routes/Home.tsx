@@ -14,6 +14,8 @@ function Home(props: {
     balance: { unlocked: number; locked: number } | null;
     transactions: Transaction[] | null;
     prices: Record<string, number>;
+    deadSocket: boolean;
+    syncData: { wallet: number; daemon: number };
 }): h.JSX.Element {
     if (!props.user || props.transactions == null || props.balance == null) {
         return <Loader />;
@@ -26,7 +28,7 @@ function Home(props: {
             {!props.user.twoFactor && (
                 <div class="pinched">
                     <p class="alert danger">
-                        ⚠ Consider enabling{" "}
+                        🛡️ Consider enabling{" "}
                         <a class="has-text-info" href="/account/2fa">
                             2FA
                         </a>{" "}
@@ -36,16 +38,20 @@ function Home(props: {
             )}
             <div class="pinched">
                 <div class="balance">
-                    <h4 class="has-text-bold">{prettyPrintAmount(total)}</h4>
+                    <h4 class="has-text-bold">
+                        <span class="icon">🐢</span>
+                        {prettyPrintAmount(total, true)}
+                    </h4>
                     {props.balance.locked > 0 && (
                         <p class="alert info fullwidth">
-                            🛈{" "}
+                            🔒{" "}
                             {prettyPrintAmount(total - props.balance.unlocked)}{" "}
                             locked
                         </p>
                     )}
                 </div>
                 <h6 class="fiat-balance">
+                    <span class="icon small">💵</span>
                     {numberWithCommas(
                         Number(
                             (
@@ -56,6 +62,21 @@ function Home(props: {
                     )}{" "}
                     USD
                 </h6>
+                {props.deadSocket && (
+                    <p class="network-status">
+                        <span class="icon small">🔴</span>Disconnected
+                    </p>
+                )}
+                {!props.deadSocket &&
+                    (props.syncData.daemon - 2 <= props.syncData.wallet ? (
+                        <p class="network-status">
+                            <span class="icon small">🟢</span>Network OK
+                        </p>
+                    ) : (
+                        <p class="network-status">
+                            <span class="icon small">🟡</span>Synchronizing
+                        </p>
+                    ))}
             </div>
             {props.transactions.length > 0 && (
                 <div>

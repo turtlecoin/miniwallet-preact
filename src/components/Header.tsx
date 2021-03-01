@@ -56,7 +56,7 @@ function Header(props: {
                                         Account
                                     </Link>
                                 </li>
-                                <li class="desktop-only right-buttons">
+                                <li class="right-buttons not-mobile">
                                     <Link onClick={logout} href="#">
                                         Logout
                                     </Link>

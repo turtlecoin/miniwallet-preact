@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FunctionalComponent, h } from "preact";
 import { Router, route, Link } from "preact-router";
@@ -15,6 +16,8 @@ import Account from "./routes/Account";
 
 import { API_URI } from "./constants/config";
 import PrivacyPolicy from "./routes/PrivacyPolicy";
+import { notify } from "./utils/notify";
+import { prettyPrintAmount } from "./utils/prettyPrintAmount";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -26,12 +29,79 @@ const App: FunctionalComponent = () => {
         null
     );
     const [prices, setPrices] = useState<Record<string, number>>({});
+    const [syncData, setSyncData] = useState({ wallet: -1, daemon: -1 });
+
+    const [deadSocket, setDeadSocket] = useState(false);
+
+    // increment to fetch wallet and balance
+    const [fetched, setFetched] = useState(Date.now());
+
+    // increment to create new socket and set listeners
+    const [gotSocket, setGotSocket] = useState(Date.now());
 
     const reset = (): void => {
         setUser(null);
         setBalance(null);
         setTransactions(null);
     };
+
+    useMemo(() => {
+        const ws = new WebSocket("wss://trtl.co.in/api/socket");
+
+        let pingTimeout = setTimeout(() => ws.close(), 10000 + 1000);
+        const heartbeat = (): void => {
+            clearTimeout(pingTimeout);
+            pingTimeout = setTimeout(() => ws.close(), 10000 + 1000);
+        };
+
+        ws.onopen = (): void => {
+            setDeadSocket(false);
+            heartbeat();
+            console.log("Socket opened!");
+        };
+
+        ws.onclose = (): void => {
+            setDeadSocket(true);
+            if (pingTimeout) {
+                clearTimeout(pingTimeout);
+            }
+            console.log("Socket closed!");
+            setTimeout(() => setGotSocket(Date.now()), 3000);
+        };
+
+        ws.onmessage = (message): void => {
+            try {
+                const msg: { type: string; data: any } = JSON.parse(
+                    message.data
+                );
+                switch (msg.type) {
+                    case "transaction":
+                        if (msg.data.amount > 0) {
+                            notify(
+                                `Received ${prettyPrintAmount(msg.data.amount)}`
+                            );
+                        }
+                        setFetched(Date.now());
+                        break;
+                    case "prices":
+                        setPrices(msg.data);
+                        break;
+                    case "sync":
+                        setSyncData(msg.data);
+                        return;
+                    case "ping":
+                        heartbeat();
+                        ws.send(JSON.stringify({ type: "pong" }));
+                        break;
+                    default:
+                        console.warn("Unsupported message type", msg.type);
+                        break;
+                }
+            } catch (err) {
+                console.warn(err.toString());
+            }
+        };
+    }, [gotSocket]);
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -50,6 +120,22 @@ const App: FunctionalComponent = () => {
             }
         })();
     }, []);
+
+    useMemo(() => {
+        (async (): Promise<void> => {
+            if (user === null) {
+                return;
+            }
+            const res = await fetch(`${API_URI}/wallet/sync`, {
+                credentials: "include",
+                method: "GET",
+            });
+
+            if (res.status === 200) {
+                setSyncData(await res.json());
+            }
+        })();
+    }, [user]);
 
     useMemo(() => {
         (async (): Promise<void> => {
@@ -81,7 +167,7 @@ const App: FunctionalComponent = () => {
                 setBalance(await res.json());
             }
         })();
-    }, [user]);
+    }, [user, fetched]);
 
     useMemo(() => {
         if (user === null) {
@@ -97,7 +183,7 @@ const App: FunctionalComponent = () => {
                 setTransactions(await res.json());
             }
         })();
-    }, [user]);
+    }, [user, fetched]);
 
     return (
         <div class="app">
@@ -105,6 +191,8 @@ const App: FunctionalComponent = () => {
                 <Header user={user} setUser={setUser} reset={reset} />
                 <Router>
                     <Home
+                        syncData={syncData}
+                        deadSocket={deadSocket}
                         transactions={transactions}
                         setUser={setUser}
                         user={user}
