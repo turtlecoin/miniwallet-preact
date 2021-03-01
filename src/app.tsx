@@ -171,9 +171,15 @@ const App: FunctionalComponent = () => {
                 credentials: "include",
                 method: "GET",
             });
-
             if (res.status === 200) {
-                setBalance(await res.json());
+                const balance: {
+                    unlocked: number;
+                    locked: number;
+                } = await res.json();
+                if (balance.locked > 0) {
+                    setTimeout(() => setFetched(Date.now()), 10000);
+                }
+                setBalance(balance);
             }
         })();
     }, [user, fetched]);
