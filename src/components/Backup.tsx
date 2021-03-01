@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
+import { route } from "preact-router";
 import { useState } from "preact/hooks";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
@@ -35,8 +36,18 @@ function Backup(props: { user: User | null }): h.JSX.Element {
     }
 
     return (
-        <div>
-            <h5>Backup Your Keys</h5>
+        <div class="pinched">
+            <h5>
+                <span
+                    class="icon cursor"
+                    onClick={(): void => {
+                        route("/account");
+                    }}
+                >
+                    ⬅️
+                </span>{" "}
+                Backup Your Keys
+            </h5>
             {secrets.spendKey === "" && (
                 <div>
                     <form

@@ -50,7 +50,7 @@ function Header(props: {
                                 </li>
                                 <li>
                                     <Link
-                                        href="/account/:page"
+                                        href="/account/:page?"
                                         activeClassName="active"
                                     >
                                         Account

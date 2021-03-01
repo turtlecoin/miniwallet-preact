@@ -47,12 +47,14 @@ function Home(props: {
             </div>
             {!props.user.twoFactor && (
                 <div class="pinched">
-                    <p class="alert danger">
-                        🛡️ Consider enabling{" "}
-                        <a class="has-text-info" href="/account/2fa">
-                            2FA
-                        </a>{" "}
-                        on your account for added security.
+                    <p class="alert danger fullwidth">
+                        <span>
+                            🛡️ Consider enabling{" "}
+                            <a class="has-text-info" href="/account">
+                                2FA
+                            </a>{" "}
+                            on your account for added security.
+                        </span>
                     </p>
                 </div>
             )}
