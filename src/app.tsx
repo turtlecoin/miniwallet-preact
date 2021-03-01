@@ -46,6 +46,10 @@ const App: FunctionalComponent = () => {
     };
 
     useMemo(() => {
+        if (typeof window === "undefined") {
+            return;
+        }
+
         const ws = new WebSocket("wss://trtl.co.in/api/socket");
 
         let pingTimeout = setTimeout(() => ws.close(), 10000 + 1000);
