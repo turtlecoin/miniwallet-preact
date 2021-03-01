@@ -146,12 +146,9 @@ table {
     background-color: rgba(0, 0, 0, 0.1);
 }
 
-.navbar > div > li > a.active {
-    font-weight: bold;
-}
+
 .navbar > div > li > a.active {
     background-color: rgba(0, 0, 0, 0.1);
-    font-weight: bold;
 }
 
 .navbar > div > li > a {
