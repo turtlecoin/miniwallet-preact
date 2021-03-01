@@ -18,7 +18,6 @@ export function Account(props: {
     reset: () => void;
 }): h.JSX.Element {
     const { page } = props.matches as { page?: string };
-    console.log(page);
     if (page?.includes(":page")) {
         route("/account", true);
         return <span />;

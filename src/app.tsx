@@ -66,7 +66,6 @@ const App: FunctionalComponent = () => {
         ws.onopen = (): void => {
             setDeadSocket(false);
             heartbeat();
-            console.log("Socket opened!");
         };
 
         ws.onclose = (): void => {
@@ -74,7 +73,7 @@ const App: FunctionalComponent = () => {
             if (pingTimeout) {
                 clearTimeout(pingTimeout);
             }
-            console.log("Socket closed!");
+            console.warn("Socket closed.");
             setTimeout(() => setGotSocket(Date.now()), 3000);
         };
 

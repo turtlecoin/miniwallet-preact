@@ -28,7 +28,6 @@ export function Disable2FA(props: {
         if (res.status === 200) {
             alert("Successfully removed 2FA!");
             const data = await res.json();
-            console.log(data);
             props.setUser(data);
         } else {
             alert("Something went wrong, check your code and try again.");
