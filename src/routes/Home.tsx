@@ -43,19 +43,6 @@ function Home(props: {
                     </p>
                 )}
             </div>
-            {!props.user.twoFactor && (
-                <div class="pinched">
-                    <p class="alert danger fullwidth">
-                        <span>
-                            🛡️ Consider enabling{" "}
-                            <a class="has-text-info" href="/account">
-                                2FA
-                            </a>{" "}
-                            on your account for added security.
-                        </span>
-                    </p>
-                </div>
-            )}
             <div class="pinched">
                 <div class="balance">
                     <h4 class="has-text-bold">
