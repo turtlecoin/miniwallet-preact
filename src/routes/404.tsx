@@ -13,7 +13,7 @@ const Notfound: FunctionalComponent = () => {
                         route("/");
                     }}
                 >
-                    Go back home
+                    🏠 Go back home
                 </button>
             </div>
         </div>

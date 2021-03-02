@@ -22,21 +22,34 @@ export function Receive(props: {
             </div>
             <div>
                 <ul class="tabs">
+                    <li class="heading">QR</li>
+                    <li>
+                        <img src={"https://trtl.co.in/api/qr/" + props.user.address} />
+                    </li>
+
                     <li class="heading">Address</li>
-                    <li class="wrap monospace">
-                        {props.user?.address}{" "}
-                        <span
-                            class="cursor"
-                            onClick={(): void => {
-                                navigator.clipboard.writeText(
-                                    props.user!.address
-                                );
-                                setCopied(true);
-                                setTimeout(() => setCopied(false), 1000);
-                            }}
-                        >
-                            📋
-                        </span>
+                    <li>
+                        <pre>
+                            <code class="wrap">
+                                {props.user?.address}
+                                <br />
+                                <button
+                                    class="button-ghost cursor clipboard-icon"
+                                    onClick={(): void => {
+                                        navigator.clipboard.writeText(
+                                            props.user!.address
+                                        );
+                                        setCopied(true);
+                                        setTimeout(() => setCopied(false), 1000);
+                                    }}
+                                >
+                                    📋 Copy to Clipboard
+                        </button>
+                            </code>
+
+                        </pre>
+
+
                     </li>
                 </ul>
             </div>
