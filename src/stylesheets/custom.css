@@ -50,8 +50,7 @@ a:hover {
     color: #43b381fd;
 }
 
-code {
-    white-space: pre-line !important;
+.wrap {
     overflow-wrap: break-word;
 }
 
@@ -302,9 +301,10 @@ button.button-ghost:hover {
     align-items: center;
     display: inline-flex;
     justify-content: center;
-    height: 1.5rem;
-    width: 1.5rem;
-    margin: 1.5rem;
+    height: 2rem;
+    width: 2rem;
+    margin: 1rem;
+    margin-left: 0.25rem;
 }
 
 @media (max-width: 750px) {
@@ -414,6 +414,7 @@ td:last-child {
     list-style: none;
     width: 100%;
     display: block;
+    margin-bottom: 1rem;
 }
 
 .tabs > h4 {

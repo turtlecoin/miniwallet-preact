@@ -17,20 +17,28 @@ export function Receive(props: {
     return (
         <div class="card container">
             <div class="pinched">
-                <label>Address:</label>
-                <pre>
-                    <code>{props.user?.address}</code>
-                </pre>
-                <button
-                    class="button-primary"
-                    onClick={(): void => {
-                        navigator.clipboard.writeText(props.user!.address);
-                        setCopied(true);
-                        setTimeout(() => setCopied(false), 1000);
-                    }}
-                >
-                    {copied ? "Copied!" : "Copy Address"}
-                </button>
+                <h4 class=" has-text-bold">Receive TRTL</h4>
+                <h6 class="subtitle">My Wallet Details</h6>
+            </div>
+            <div>
+                <ul class="tabs">
+                    <li class="heading">Address</li>
+                    <li class="wrap monospace">
+                        {props.user?.address}{" "}
+                        <span
+                            class="cursor"
+                            onClick={(): void => {
+                                navigator.clipboard.writeText(
+                                    props.user!.address
+                                );
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 1000);
+                            }}
+                        >
+                            📋
+                        </span>
+                    </li>
+                </ul>
             </div>
         </div>
     );
