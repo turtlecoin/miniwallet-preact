@@ -6,11 +6,13 @@ import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { Transaction } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
+import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 
 export function Send(props: {
     path: string;
     transactions: Transaction[] | null;
     setTransactions: (txs: Transaction[]) => void;
+    balance: { unlocked: number; locked: number };
 }): h.JSX.Element {
     const [submitting, setSubmitting] = useState(false);
     const [paymentID, setPaymentID] = useState("");
@@ -62,6 +64,10 @@ export function Send(props: {
     return (
         <div class="card container">
             <div class="pinched">
+                <h4 class=" has-text-bold">Send TRTL</h4>
+                <h6 class="subtitle">
+                    {prettyPrintAmount(props.balance.unlocked)} available
+                </h6>
                 <label>Amount:</label>
                 <form
                     onSubmit={(event): void => {

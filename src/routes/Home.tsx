@@ -27,19 +27,17 @@ function Home(props: {
         <div class="card container">
             <div class="right-tags">
                 {props.deadSocket && (
-                    <p class="alert danger">
-                        <span class="icon small">🔴</span>Disconnected
-                    </p>
+                    <p class="alert danger">🔴 Disconnected</p>
                 )}
                 {props.syncData.daemon - props.syncData.wallet > 2 && (
                     <p class="alert warning">
-                        <span class="icon small">🟡</span>Synchronizing:{" "}
+                        🟡 Synchronizing:
                         {props.syncData.daemon - props.syncData.wallet}{" "}
                         {props.syncData.wallet}/{props.syncData.daemon}
                     </p>
                 )}
                 {props.balance.locked > 0 && (
-                    <p class="alert info fullwidth">
+                    <p class="alert info">
                         🔒 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
                         locked
                     </p>

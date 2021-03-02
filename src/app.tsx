@@ -216,6 +216,7 @@ const App: FunctionalComponent = () => {
                     />
                     <Receive user={user} path="/receive" />
                     <Send
+                        balance={balance || { unlocked: 0, locked: 0 }}
                         transactions={transactions}
                         setTransactions={setTransactions}
                         path="/send"
