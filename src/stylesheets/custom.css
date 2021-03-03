@@ -118,10 +118,12 @@ pre {
 
 .navbar {
     z-index: 1;
-    position: absolute;
     overflow: hidden;
     width: 100%;
     background-color: #43b380;
+    position: fixed;
+    top: 0px;
+    z-index: 4;
 }
 
 tbody:nth-child(2) {
