@@ -13,6 +13,11 @@ export function Disable2FA(props: {
 
     const [disabling2FA, setDisabling2FA] = useState(false);
 
+    const clearForm = (): void => {
+        setDisenrollPw("");
+        setDisenrollToken("");
+    };
+
     const disenroll2FAKey = async (): Promise<void> => {
         const res = await fetch(`${API_URI}/account/totp/disenroll`, {
             method: "POST",
@@ -29,6 +34,7 @@ export function Disable2FA(props: {
             alert("Successfully removed 2FA!");
             const data = await res.json();
             props.setUser(data);
+            clearForm();
         } else {
             alert("Something went wrong, check your code and try again.");
         }

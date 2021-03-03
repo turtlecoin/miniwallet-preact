@@ -68,7 +68,7 @@ export function Account(props: {
                 )}
 
                 {page === "password" && (
-                    <ChangePassword setUser={props.setUser} />
+                    <ChangePassword setUser={props.setUser} user={props.user} />
                 )}
                 {page === "2fa" && (
                     <div>

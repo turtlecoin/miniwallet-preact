@@ -16,6 +16,10 @@ export function Enable2FA(props: {
     const [qrData, setQrData] = useState<TOTPRes | null>(null);
     const [token, setToken] = useState("");
 
+    const clearForm = (): void => {
+        setToken("");
+    };
+
     const get2FAKey = async (): Promise<void> => {
         const res = await fetch(`${API_URI}/account/totp/secret`, {
             method: "GET",
@@ -38,9 +42,10 @@ export function Enable2FA(props: {
             }),
         });
         if (res.status === 200) {
-            alert("Successfully enrolled in 2FA!");
             const data = await res.json();
             props.setUser(data);
+            clearForm();
+            alert("Successfully enrolled in 2FA!");
         } else {
             alert("Something went wrong, check your code and try again.");
         }

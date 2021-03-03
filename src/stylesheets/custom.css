@@ -253,6 +253,11 @@ button.button-ghost {
     margin: 0px;
 }
 
+button[disabled],
+button.disabled {
+    opacity: 0.8;
+}
+
 button.button-ghost:hover {
     color: #2969cf;
 }

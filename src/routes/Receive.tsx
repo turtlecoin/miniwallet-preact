@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
-import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { User } from "../types";
 
@@ -8,8 +7,6 @@ export function Receive(props: {
     path: string;
     user: User | null;
 }): h.JSX.Element {
-    const [copied, setCopied] = useState(false);
-
     if (!props.user) {
         return <Loader />;
     }
@@ -24,7 +21,7 @@ export function Receive(props: {
                 <div style={{ textAlign: "center" }}>
                     <img
                         style={{ margin: "2rem" }}
-                        src={"https://trtl.co.in/api/qr/" + props.user.address}
+                        src={`https://trtl.co.in/api/qr/${props.user.address}`}
                     />
                 </div>
                 <div class="pinched">
@@ -38,8 +35,6 @@ export function Receive(props: {
                                     navigator.clipboard.writeText(
                                         props.user!.address
                                     );
-                                    setCopied(true);
-                                    setTimeout(() => setCopied(false), 1000);
                                 }}
                             >
                                 📋 Copy to Clipboard

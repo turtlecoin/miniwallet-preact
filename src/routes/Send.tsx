@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
-import { Transaction } from "../types";
+import { Transaction, User } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
 import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 
@@ -12,12 +12,21 @@ export function Send(props: {
     path: string;
     transactions: Transaction[] | null;
     setTransactions: (txs: Transaction[]) => void;
+    user: User | null;
     balance: { unlocked: number; locked: number };
 }): h.JSX.Element {
     const [submitting, setSubmitting] = useState(false);
     const [paymentID, setPaymentID] = useState("");
     const [address, setAddress] = useState("");
     const [amount, setAmount] = useState("");
+    const [totp, setTOTP] = useState("");
+
+    const clearForm = () => {
+        setPaymentID("");
+        setAddress("");
+        setAmount("");
+        setTOTP("");
+    };
 
     if (props.transactions == null) {
         return <Loader />;
@@ -36,6 +45,7 @@ export function Send(props: {
                 body: JSON.stringify({
                     paymentID,
                     address,
+                    totp,
                     amount: humanToAtomic(amt),
                 }),
             });
@@ -112,6 +122,19 @@ export function Send(props: {
                                     setPaymentID(event.target.value);
                                 }}
                             />
+                            {props.user?.twoFactor && (
+                                <Fragment>
+                                    <label>2FA Code:</label>
+                                    <input
+                                        value={totp}
+                                        onInput={(event: any): void => {
+                                            setTOTP(event.target.value);
+                                        }}
+                                        type="number"
+                                        placeholder="123456"
+                                    />
+                                </Fragment>
+                            )}
                             <div class="buttons right">
                                 <button
                                     type="submit"

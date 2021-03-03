@@ -220,6 +220,7 @@ const App: FunctionalComponent = () => {
                         transactions={transactions}
                         setTransactions={setTransactions}
                         path="/send"
+                        user={user}
                     />
                     <Login setUser={setUser} path="/login" />
                     <Register setUser={setUser} path="/register" />

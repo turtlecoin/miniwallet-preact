@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { route } from "preact-router";
 import { useState } from "preact/hooks";
 import { API_URI } from "../constants/config";
@@ -7,10 +7,19 @@ import { User } from "../types";
 
 export function ChangePassword(props: {
     setUser: (user: User) => void;
+    user: User | null;
 }): h.JSX.Element {
     const [oldPassword, setOldPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [totp, setTOTP] = useState("");
+
+    const clearForm = (): void => {
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmPassword("");
+        setTOTP("");
+    };
 
     const changePassword = async (): Promise<void> => {
         if (newPassword !== confirmPassword) {
@@ -27,11 +36,13 @@ export function ChangePassword(props: {
             body: JSON.stringify({
                 oldPassword,
                 newPassword,
+                totp,
             }),
         });
         if (res.status === 200) {
             alert("Your password has been changed.");
             props.setUser(await res.json());
+            clearForm();
         } else {
             alert("There was a problem when changing your password.");
         }
@@ -94,6 +105,20 @@ export function ChangePassword(props: {
                     />
                 </div>
             </div>
+            {props.user?.twoFactor && (
+                <Fragment>
+                    <label>2FA Code:</label>
+                    <input
+                        value={totp}
+                        onInput={(event: any): void => {
+                            setTOTP(event.target.value);
+                        }}
+                        type="number"
+                        placeholder="123456"
+                    />
+                </Fragment>
+            )}
+
             <button type="submit" class="button-primary">
                 Change Password
             </button>

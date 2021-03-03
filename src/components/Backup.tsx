@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { route } from "preact-router";
 import { useState } from "preact/hooks";
 import { API_URI } from "../constants/config";
@@ -8,6 +8,7 @@ import { User } from "../types";
 
 function Backup(props: { user: User | null }): h.JSX.Element {
     const [password, setPassword] = useState("");
+    const [totp, setTOTP] = useState("");
     const [secrets, setSecrets] = useState({
         spendKey: "",
         viewKey: "",
@@ -22,12 +23,13 @@ function Backup(props: { user: User | null }): h.JSX.Element {
             },
             body: JSON.stringify({
                 password,
+                totp,
             }),
         });
         if (res.status === 200) {
             setSecrets(await res.json());
         } else {
-            alert("Couldn't get secrets, check your password.");
+            alert(await res.text());
         }
     };
 
@@ -67,6 +69,20 @@ function Backup(props: { user: User | null }): h.JSX.Element {
                             type="password"
                             placeholder="hunter2"
                         />
+                        {props.user.twoFactor && (
+                            <Fragment>
+                                <label>2FA Code:</label>
+                                <input
+                                    value={totp}
+                                    onInput={(event: any): void => {
+                                        setTOTP(event.target.value);
+                                    }}
+                                    type="number"
+                                    placeholder="123456"
+                                />
+                            </Fragment>
+                        )}
+
                         <button type="submit" class="button-primary">
                             Show Secrets
                         </button>
