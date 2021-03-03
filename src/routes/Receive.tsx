@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
 import { Loader } from "../components/Loader";
+import { API_URI } from "../constants/config";
 import { User } from "../types";
 
 export function Receive(props: {
@@ -21,7 +22,7 @@ export function Receive(props: {
                 <div style={{ textAlign: "center" }}>
                     <img
                         style={{ margin: "2rem" }}
-                        src={`https://trtl.co.in/api/qr/${props.user.address}`}
+                        src={`${API_URI}/qr/${props.user.address}`}
                     />
                 </div>
                 <div class="pinched">
