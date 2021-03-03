@@ -54,6 +54,7 @@ export function Send(props: {
                     const copy = [...props.transactions];
                     copy.unshift(await res.json());
                     props.setTransactions(copy);
+                    clearForm();
                     alert("Sent transaction!");
                 }
             } else {
