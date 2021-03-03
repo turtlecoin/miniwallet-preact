@@ -117,7 +117,6 @@ pre {
 }
 
 .navbar {
-    z-index: 1;
     overflow: hidden;
     width: 100%;
     background-color: #43b380;
