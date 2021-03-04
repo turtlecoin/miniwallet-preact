@@ -250,7 +250,8 @@ button.button-ghost {
     text-transform: none;
     color: #3c78d8;
     border: none;
-    padding: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
     margin: 0px;
 }
 
