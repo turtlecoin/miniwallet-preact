@@ -2,6 +2,7 @@ html {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
 }
+
 body {
     padding-top: 44px;
     height: 100%;
@@ -71,9 +72,6 @@ tbody td {
     border-bottom: none;
 }
 
-tbody tr:not(:last-child) {
-    border-bottom: 1px solid #e1e1e1;
-}
 
 .subtitle {
     margin-top: -2rem;
@@ -123,10 +121,6 @@ pre {
     position: fixed;
     top: 0px;
     z-index: 4;
-}
-
-tbody:nth-child(2) {
-    background-color: "#F5F5F5";
 }
 
 table {
@@ -198,7 +192,7 @@ table {
 
 .clipboard-icon {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
 .alert.fullwidth > span {
@@ -337,12 +331,14 @@ button.button-ghost:hover {
     .nav-container {
         margin-left: 2.5%;
     }
+
     .card {
         margin-top: 0rem;
         width: 100vw;
         padding: 1.5rem 0rem;
         min-height: calc(100vh - 44px);
     }
+
     .card.no-menu {
         min-height: 100vh;
         margin-top: -44px;
@@ -492,4 +488,44 @@ a.has-text-info:hover {
 
 ul {
     list-style-type: none;
+}
+
+.tx-table {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.tx-table td, .tx-table th, .tx-table tr {
+    border-bottom: none;
+}
+
+.show-tx-details {
+    cursor: pointer;
+    user-select: none;
+}
+
+.tx-in:before {
+    content: "+";
+}
+
+.tx-in {
+    color: #43b380;
+}
+
+.tx-out {
+    color: #831414;
+}
+
+.show-tx-details {
+    padding: 1rem;
+    text-align: right;
+    font-size: 20pt;
+}
+
+.tx-body {
+    background-color: #FCFCFC;
+    border-top: 1px solid #e1e1e1;
+}
+
+.tx-body td {
+    padding-left: 4%;
 }
