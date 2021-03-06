@@ -1,5 +1,5 @@
 import { h } from "preact";
-import { useMemo, useState } from "preact/hooks";
+import {useMemo, useRef, useState} from "preact/hooks";
 
 // thanks to cli-spinners at https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
@@ -7,7 +7,7 @@ const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", 
 export function Loader(): h.JSX.Element {
     const [i, setI] = useState(0);
     const [delay, setDelay] = useState(true);
-
+    const iRef = useRef(i);
     useMemo(() => {
         const timeout = setTimeout(() => setDelay(false), 500);
 
@@ -17,9 +17,10 @@ export function Loader(): h.JSX.Element {
     }, []);
 
     useMemo(() => {
+        iRef.current = i;
         const timeout = setTimeout(() => {
-            if (i < spinner.length - 1) {
-                setI(i + 1);
+            if (iRef.current < spinner.length - 1) {
+                setI(iRef.current + 1);
             } else {
                 setI(0);
             }
