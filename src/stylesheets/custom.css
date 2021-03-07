@@ -493,14 +493,13 @@ ul {
 .tx-table {
     border-bottom: 1px solid #e1e1e1;
 }
-
-.tx-table td, .tx-table th, .tx-table tr {
-    border-bottom: none;
-}
-
-.show-tx-details {
+.tx-table thead:active, .tx-table thead:hover {
+    background-color: rgba(67, 179, 129, 0.1);
     cursor: pointer;
     user-select: none;
+}
+.tx-table td, .tx-table th, .tx-table tr {
+    border-bottom: none;
 }
 
 .tx-in:before {
