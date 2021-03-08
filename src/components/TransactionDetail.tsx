@@ -73,7 +73,7 @@ export function TransactionDetail(props: {
                     <div>
                         Status{" "}
                         <span style={{ float: "right" }}>
-                            {props.tx.timestamp ? "Complete" : "Pending"}
+                            {props.tx.timestamp ? "✅ Complete" : "⌚ Pending"}
                         </span>
                     </div>
                     <div>
