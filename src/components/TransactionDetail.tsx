@@ -95,7 +95,10 @@ export function TransactionDetail(props: {
                         <div>Unlock Time: {props.tx.unlockTime}</div>
                     )}
                     {props.tx.paymentID !== "" && (
-                        <div>Payment ID: {props.tx.paymentID}</div>
+                        <div>
+                            Payment ID:{" "}
+                            <pre>{props.tx.paymentID.slice(0, 6)}</pre>
+                        </div>
                     )}
                     <br />
                     <a

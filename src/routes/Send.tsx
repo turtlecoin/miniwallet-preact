@@ -113,11 +113,20 @@ export function Send(props: {
                                     setAddress(event.target.value);
                                 }}
                             />
-                            <label>PaymentID:</label>
+                            <label>
+                                <span class="tooltip">
+                                    ⚠️
+                                    <span class="tooltiptext">
+                                        May be required by some exchanges and
+                                        services.
+                                    </span>
+                                </span>{" "}
+                                PaymentID:
+                            </label>
                             <input
                                 type="text"
                                 className="input"
-                                placeholder="Optional"
+                                placeholder="9a932094c16f9379e75cc64eaf4c90ddb82f62a1c108969c04888a28848e330a"
                                 value={paymentID}
                                 onInput={(event: any): void => {
                                     setPaymentID(event.target.value);
