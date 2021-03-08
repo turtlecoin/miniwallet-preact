@@ -62,6 +62,7 @@ export function TransactionDetail(props: {
             </table>
             {showDetails && (
                 <div
+                    class={"expanded-tx"}
                     style={{
                         padding: "1rem 2.5%",
                         borderBottom: "1px solid #e1e1e1",
@@ -114,7 +115,8 @@ export function TransactionDetail(props: {
                                     textOverflow: "ellipses",
                                 }}
                             >
-                                {props.tx.paymentID}
+                                {props.tx.paymentID.slice(0, 6)}…
+                                {props.tx.paymentID.slice(-6)}
                             </span>
                         </div>
                     )}

@@ -556,3 +556,8 @@ ul {
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
+
+.expanded-tx {
+    font-weight: 300;
+    font-size: 12px;
+}

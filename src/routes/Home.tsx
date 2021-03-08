@@ -31,11 +31,7 @@ function Home(props: {
                     <p class="alert danger">🔴 Disconnected</p>
                 )}
                 {props.syncData.daemon - props.syncData.wallet > 2 && (
-                    <p class="alert warning">
-                        🟡 Synchronizing:
-                        {props.syncData.daemon - props.syncData.wallet}{" "}
-                        {props.syncData.wallet}/{props.syncData.daemon}
-                    </p>
+                    <p class="alert warning">🟡 Synchronizing</p>
                 )}
                 {props.balance.locked > 0 && (
                     <p class="alert info">
