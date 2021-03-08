@@ -83,7 +83,7 @@ export function TransactionDetail(props: {
                         </span>
                     </div>
                     <div>
-                        Fee{" "}
+                        Miner Fee{" "}
                         <span style={{ float: "right" }}>
                             {prettyPrintAmount(props.tx.fee)}
                         </span>
@@ -107,14 +107,14 @@ export function TransactionDetail(props: {
                     )}
                     {props.tx.paymentID !== "" && (
                         <div>
-                            Payment ID:{" "}
+                            Payment ID{" "}
                             <pre
                                 style={{
                                     float: "right",
                                     textOverflow: "ellipses",
                                 }}
                             >
-                                {props.tx.paymentID.slice(0, 6)}
+                                {props.tx.paymentID}
                             </pre>
                         </div>
                     )}
