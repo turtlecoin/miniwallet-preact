@@ -91,6 +91,12 @@ export function TransactionDetail(props: {
                             {props.syncData.daemon - props.tx.blockHeight - 1}
                         </span>
                     </div>
+                    {props.tx.unlockTime > 0 && (
+                        <div>Unlock Time: {props.tx.unlockTime}</div>
+                    )}
+                    {props.tx.paymentID !== "" && (
+                        <div>Payment ID: {props.tx.paymentID}</div>
+                    )}
                     <br />
                     <a
                         target="__blank"
@@ -99,12 +105,6 @@ export function TransactionDetail(props: {
                     >
                         View on Block Explorer
                     </a>
-                    {props.tx.unlockTime > 0 && (
-                        <div>Unlock Time: {props.tx.unlockTime}</div>
-                    )}
-                    {props.tx.paymentID !== "" && (
-                        <div>Payment ID: {props.tx.paymentID}</div>
-                    )}
                 </div>
             )}
         </Fragment>
