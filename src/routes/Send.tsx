@@ -10,10 +10,9 @@ import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 
 export function Send(props: {
     path: string;
-    transactions: Transaction[] | null;
-    setTransactions: (txs: Transaction[]) => void;
     user: User | null;
     balance: { unlocked: number; locked: number };
+    setFetched: () => void;
 }): h.JSX.Element {
     const [submitting, setSubmitting] = useState(false);
     const [paymentID, setPaymentID] = useState("");
@@ -27,10 +26,6 @@ export function Send(props: {
         setAmount("");
         setTOTP("");
     };
-
-    if (props.transactions == null) {
-        return <Loader />;
-    }
 
     const submitSend = async (): Promise<void> => {
         setSubmitting(true);
@@ -50,13 +45,9 @@ export function Send(props: {
                 }),
             });
             if (res.status === 200) {
-                if (props.transactions !== null) {
-                    const copy = [...props.transactions];
-                    copy.unshift(await res.json());
-                    props.setTransactions(copy);
-                    clearForm();
-                    alert("Sent transaction!");
-                }
+                props.setFetched();
+                clearForm();
+                alert("Sent transaction!");
             } else {
                 const msg = await res.text();
 
@@ -115,7 +106,7 @@ export function Send(props: {
                             />
                             <label>
                                 <span class="tooltip">
-                                    ⚠️
+                                    ℹ️
                                     <span class="tooltiptext">
                                         May be required by some exchanges and
                                         services.

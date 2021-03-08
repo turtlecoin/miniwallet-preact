@@ -560,4 +560,5 @@ ul {
 .expanded-tx {
     font-weight: 300;
     font-size: 12px;
+    padding-bottom: 1rem;
 }
