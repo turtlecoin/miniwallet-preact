@@ -28,7 +28,7 @@ export function TransactionDetail(props: {
                                         : setShowDetails(false)
                                 }
                             >
-                                {showDetails ? "-" : "+"}
+                                {showDetails ? "➖" : "➕"}
                             </button>{" "}
                             {props.tx.hash.slice(0, 6)}…
                             {props.tx.hash.slice(
@@ -63,14 +63,23 @@ export function TransactionDetail(props: {
             {showDetails && (
                 <div
                     style={{
-                        padding: "1rem 2.5% 1rem 4.3%",
+                        padding: "1rem 2.5%",
                         borderBottom: "1px solid #e1e1e1",
                     }}
                 >
+                    <h6 style={{ marginBottom: "1rem" }}>
+                        Transaction Details
+                    </h6>
                     <div>
                         Status{" "}
                         <span style={{ float: "right" }}>
                             {props.tx.timestamp ? "Complete" : "Pending"}
+                        </span>
+                    </div>
+                    <div>
+                        Amount
+                        <span style={{ float: "right" }}>
+                            {prettyPrintAmount(props.tx.amount)}
                         </span>
                     </div>
                     <div>
@@ -88,7 +97,9 @@ export function TransactionDetail(props: {
                     <div>
                         Confirmations{" "}
                         <span style={{ float: "right" }}>
-                            {props.syncData.daemon - props.tx.blockHeight - 1}
+                            {numberWithCommas(
+                                props.syncData.daemon - props.tx.blockHeight - 1
+                            )}
                         </span>
                     </div>
                     {props.tx.unlockTime > 0 && (
@@ -97,17 +108,25 @@ export function TransactionDetail(props: {
                     {props.tx.paymentID !== "" && (
                         <div>
                             Payment ID:{" "}
-                            <pre>{props.tx.paymentID.slice(0, 6)}</pre>
+                            <pre
+                                style={{
+                                    float: "right",
+                                    textOverflow: "ellipses",
+                                }}
+                            >
+                                {props.tx.paymentID.slice(0, 6)}
+                            </pre>
                         </div>
                     )}
-                    <br />
-                    <a
-                        target="__blank"
-                        rel="noreferrer"
-                        href={`https://explorer.turtlecoin.lol/transaction.html?hash=${props.tx.hash}`}
-                    >
-                        View on Block Explorer
-                    </a>
+                    <div style={{ paddingTop: "1rem" }}>
+                        <a
+                            target="__blank"
+                            rel="noreferrer"
+                            href={`https://explorer.turtlecoin.lol/transaction.html?hash=${props.tx.hash}`}
+                        >
+                            View on Block Explorer
+                        </a>
+                    </div>
                 </div>
             )}
         </Fragment>
