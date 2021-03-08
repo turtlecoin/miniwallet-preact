@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { h } from "preact";
-import { Transaction, User } from "../types";
-import {
-    numberWithCommas,
-    prettyPrintAmount,
-} from "../utils/prettyPrintAmount";
-import { Loader } from "../components/Loader";
+import {h} from "preact";
+import {Transaction, User} from "../types";
+import {numberWithCommas, prettyPrintAmount,} from "../utils/prettyPrintAmount";
+import {Loader} from "../components/Loader";
+import {TransactionDetail} from "../components/TransactionDetail";
 
 function Home(props: {
     path: string;
@@ -63,59 +61,18 @@ function Home(props: {
             </div>
             {props.transactions.length > 0 && (
                 <div>
-                    <table style={{ width: "100%" }}>
-                        <thead>
-                            <tr
-                                class="tx-table-row"
-                                style={{ backgroundColor: "#F5F5F5" }}
-                            >
-                                <td>Transactions</td>
-                                <td />
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {props.transactions.map((tx) => (
-                                <tr class="tx-table-row" key={tx.hash}>
-                                    <td class="monospace">
-                                        <a
-                                            class="black-link"
-                                            href={`https://explorer.turtlecoin.lol/transaction.html?hash=${tx.hash}`}
-                                            target="_blank"
-                                            rel="noreferrer"
-                                        >
-                                            {`${tx.hash.slice(
-                                                0,
-                                                6
-                                            )}…${tx.hash.slice(
-                                                tx.hash.length - 6,
-                                                tx.hash.length
-                                            )}`}
-                                        </a>
-                                    </td>
-                                    <td class="has-text-right">
-                                        {tx.amount < 0 && (
-                                            <span style={{ color: "#831414" }}>
-                                                {prettyPrintAmount(tx.amount)}
-                                            </span>
-                                        )}
-                                        {tx.amount > 0 && (
-                                            <span style={{ color: "#43b380" }}>
-                                                +{prettyPrintAmount(tx.amount)}
-                                            </span>
-                                        )}
-                                        <br />
-                                        <span>
-                                            {tx.timestamp
-                                                ? new Date(
-                                                      tx.timestamp * 1000
-                                                  ).toLocaleDateString()
-                                                : "Pending"}
-                                        </span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                    <p style={{
+                        backgroundColor: "#F5F5F5",
+                        padding: "1rem",
+                        margin: "0",
+                        borderBottom: "1px solid #e1e1e1",
+                        fontWeight: "bold"
+                    }}>Transactions</p>
+                    <div>
+                        {props.transactions.map((tx) => (
+                            <TransactionDetail tx={tx} />
+                        ))}
+                    </div>
                 </div>
             )}
             {props.transactions.length === 0 && (
