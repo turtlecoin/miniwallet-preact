@@ -108,14 +108,14 @@ export function TransactionDetail(props: {
                     {props.tx.paymentID !== "" && (
                         <div>
                             Payment ID{" "}
-                            <pre
+                            <span
                                 style={{
                                     float: "right",
                                     textOverflow: "ellipses",
                                 }}
                             >
                                 {props.tx.paymentID}
-                            </pre>
+                            </span>
                         </div>
                     )}
                     <div style={{ paddingTop: "1rem" }}>
