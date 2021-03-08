@@ -1,5 +1,5 @@
-import {h} from "preact";
-import {useEffect, useRef, useState} from "preact/hooks";
+import { h } from "preact";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 // thanks to cli-spinners at https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json
 const spinner = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
@@ -24,7 +24,7 @@ export function Loader(): h.JSX.Element {
     }, []);
 
     useEffect(() => {
-        iRef.current = i
+        iRef.current = i;
     }, [i]);
 
     if (delay) {

@@ -1,68 +1,112 @@
-import { h } from "preact";
+import { Fragment, h } from "preact";
 import { Transaction } from "../types";
-import { numberWithCommas, prettyPrintAmount } from "../utils/prettyPrintAmount";
+import {
+    numberWithCommas,
+    prettyPrintAmount,
+} from "../utils/prettyPrintAmount";
 import { useState } from "preact/hooks";
 
-export function TransactionDetail(props: { tx: Transaction }): h.JSX.Element {
-
-  const [showDetails, setShowDetails] = useState(false);
-  return (
-    <table className="tx-table table card-table text-nowrap table-vcenter">
-      <thead
-        onClick={((): void => !showDetails ? setShowDetails(true) : setShowDetails(false))}>
-        <tr>
-          <th className="monospace" style={{ fontWeight: "normal" }}
-          >{props.tx.hash.slice(
-            0,
-            6
-          )}…{props.tx.hash.slice(
-            props.tx.hash.length - 6,
-            props.tx.hash.length
-          )}
-          </th>
-          <th style={{
-            textAlign: "right",
-            fontWeight: "normal",
-          }}>
-            <div
-              className={(props.tx.amount < 0) ? "tx-out" : "tx-in"}>
-              {prettyPrintAmount(props.tx.amount)}
-            </div>
-            <div className="tx-date">
-              {props.tx.timestamp
-                ? new Date(
-                  props.tx.timestamp * 1000
-                ).toLocaleDateString()
-                : "Pending"}
-            </div>
-          </th>
-        </tr>
-      </thead>
-      {
-        showDetails &&
-        <tbody className="tx-body">
-          <tr>
-            <td>Block Height</td>
-            <td
-              style={{ textAlign: "right" }}>{numberWithCommas(props.tx.blockHeight)}</td>
-          </tr>
-          <tr>
-            <td>Fee</td>
-            <td style={{ textAlign: "right" }}
-              className="tx-fee">{prettyPrintAmount(props.tx.fee)}</td>
-          </tr>
-          <tr>
-            <td>Unlock Time</td>
-            <td
-              style={{ textAlign: "right" }}>{props.tx.unlockTime}</td>
-          </tr>
-          <tr>
-            <td>Payment ID</td>
-            <td
-              style={{ textAlign: "right" }}>{props.tx.paymentID}</td>
-          </tr>
-        </tbody>
-      }
-    </table>
-  )
+export function TransactionDetail(props: {
+    tx: Transaction;
+    syncData: { wallet: number; daemon: number };
+}): h.JSX.Element {
+    const [showDetails, setShowDetails] = useState(false);
+    return (
+        <Fragment>
+            <table className="tx-table table card-table text-nowrap table-vcenter">
+                <tbody>
+                    <tr>
+                        <td
+                            className="monospace"
+                            style={{ fontWeight: "normal" }}
+                        >
+                            <button
+                                class="button-ghost"
+                                onClick={(): void =>
+                                    !showDetails
+                                        ? setShowDetails(true)
+                                        : setShowDetails(false)
+                                }
+                            >
+                                {showDetails ? "-" : "+"}
+                            </button>{" "}
+                            {props.tx.hash.slice(0, 6)}…
+                            {props.tx.hash.slice(
+                                props.tx.hash.length - 6,
+                                props.tx.hash.length
+                            )}
+                        </td>
+                        <td
+                            style={{
+                                textAlign: "right",
+                                fontWeight: "normal",
+                            }}
+                        >
+                            <div
+                                className={
+                                    props.tx.amount < 0 ? "tx-out" : "tx-in"
+                                }
+                            >
+                                {prettyPrintAmount(props.tx.amount)}
+                            </div>
+                            <div className="tx-date">
+                                {props.tx.timestamp
+                                    ? new Date(
+                                          props.tx.timestamp * 1000
+                                      ).toLocaleDateString()
+                                    : "Pending"}
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {showDetails && (
+                <div
+                    style={{
+                        padding: "1rem 2.5% 1rem 4.3%",
+                        borderBottom: "1px solid #e1e1e1",
+                    }}
+                >
+                    <div>
+                        Status{" "}
+                        <span style={{ float: "right" }}>
+                            {props.tx.timestamp ? "Complete" : "Pending"}
+                        </span>
+                    </div>
+                    <div>
+                        Fee{" "}
+                        <span style={{ float: "right" }}>
+                            {prettyPrintAmount(props.tx.fee)}
+                        </span>
+                    </div>
+                    <div>
+                        Block Height{" "}
+                        <span style={{ float: "right" }}>
+                            {numberWithCommas(props.tx.blockHeight)}
+                        </span>
+                    </div>
+                    <div>
+                        Confirmations{" "}
+                        <span style={{ float: "right" }}>
+                            {props.syncData.daemon - props.tx.blockHeight - 1}
+                        </span>
+                    </div>
+                    <br />
+                    <a
+                        target="__blank"
+                        rel="noreferrer"
+                        href={`https://explorer.turtlecoin.lol/transaction.html?hash=${props.tx.hash}`}
+                    >
+                        View on Block Explorer
+                    </a>
+                    {props.tx.unlockTime > 0 && (
+                        <div>Unlock Time: {props.tx.unlockTime}</div>
+                    )}
+                    {props.tx.paymentID !== "" && (
+                        <div>Payment ID: {props.tx.paymentID}</div>
+                    )}
+                </div>
+            )}
+        </Fragment>
+    );
 }

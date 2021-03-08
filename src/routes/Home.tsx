@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {h} from "preact";
-import {Transaction, User} from "../types";
-import {numberWithCommas, prettyPrintAmount,} from "../utils/prettyPrintAmount";
-import {Loader} from "../components/Loader";
-import {TransactionDetail} from "../components/TransactionDetail";
+import { h } from "preact";
+import { Transaction, User } from "../types";
+import {
+    numberWithCommas,
+    prettyPrintAmount,
+} from "../utils/prettyPrintAmount";
+import { Loader } from "../components/Loader";
+import { TransactionDetail } from "../components/TransactionDetail";
 
 function Home(props: {
     path: string;
@@ -61,16 +64,23 @@ function Home(props: {
             </div>
             {props.transactions.length > 0 && (
                 <div>
-                    <p style={{
-                        backgroundColor: "#F5F5F5",
-                        padding: "1rem",
-                        margin: "0",
-                        borderBottom: "1px solid #e1e1e1",
-                        fontWeight: "bold"
-                    }}>Transactions</p>
+                    <p
+                        style={{
+                            backgroundColor: "#F5F5F5",
+                            padding: "1rem",
+                            margin: "0",
+                            borderBottom: "1px solid #e1e1e1",
+                            fontWeight: "bold",
+                        }}
+                    >
+                        Transactions
+                    </p>
                     <div>
                         {props.transactions.map((tx) => (
-                            <TransactionDetail tx={tx} />
+                            <TransactionDetail
+                                syncData={props.syncData}
+                                tx={tx}
+                            />
                         ))}
                     </div>
                 </div>
