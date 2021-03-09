@@ -65,7 +65,6 @@ export function TransactionDetail(props: {
                     class={"expanded-tx"}
                     style={{
                         padding: "1rem 2.5%",
-                        borderBottom: "1px solid #e1e1e1",
                     }}
                 >
                     <h6 style={{ marginBottom: "1rem" }}>

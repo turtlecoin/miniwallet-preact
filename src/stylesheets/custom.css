@@ -376,6 +376,18 @@ td:last-child {
     padding-right: 2.5%;
 }
 
+.tx-table:last-child {
+    border-bottom: none;
+}
+
+.expanded-tx {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.expanded-tx:last-child {
+    border-bottom: none;
+}
+
 .hidden {
     display: none;
 }

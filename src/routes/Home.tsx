@@ -65,13 +65,12 @@ function Home(props: {
                             backgroundColor: "#F5F5F5",
                             padding: "1rem",
                             margin: "0",
-                            borderBottom: "1px solid #e1e1e1",
                             fontWeight: "bold",
                         }}
                     >
                         Transactions
                     </p>
-                    <div>
+                    <div class="tx-table-wrapper">
                         {props.transactions.map((tx) => (
                             <TransactionDetail
                                 syncData={props.syncData}
