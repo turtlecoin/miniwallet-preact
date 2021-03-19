@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Fragment, h } from "preact";
+import { route } from "preact-router";
 import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
-import { Transaction, User } from "../types";
+import { User } from "../types";
 import { humanToAtomic } from "../utils/humanToAtomic";
 import { prettyPrintAmount } from "../utils/prettyPrintAmount";
 
@@ -20,7 +21,7 @@ export function Send(props: {
     const [amount, setAmount] = useState("");
     const [totp, setTOTP] = useState("");
 
-    const clearForm = () => {
+    const clearForm = (): void => {
         setPaymentID("");
         setAddress("");
         setAmount("");
@@ -62,6 +63,15 @@ export function Send(props: {
         }
         setSubmitting(false);
     };
+
+    if (!props.user) {
+        return <Loader />;
+    }
+
+    if (!props.user.confirmedRecovery) {
+        route("/confirm-recovery");
+        return <Loader />;
+    }
 
     return (
         <div class="card container">

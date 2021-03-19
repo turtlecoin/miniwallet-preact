@@ -27,6 +27,11 @@ export function Account(props: {
         return <Loader />;
     }
 
+    if (!props.user.confirmedRecovery) {
+        route("/confirm-recovery");
+        return <Loader />;
+    }
+
     return (
         <div class="card container">
             <div>

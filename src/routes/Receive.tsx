@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
+import { route } from "preact-router";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
@@ -9,6 +10,11 @@ export function Receive(props: {
     user: User | null;
 }): h.JSX.Element {
     if (!props.user) {
+        return <Loader />;
+    }
+
+    if (!props.user.confirmedRecovery) {
+        route("/confirm-recovery");
         return <Loader />;
     }
 

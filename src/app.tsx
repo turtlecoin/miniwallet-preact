@@ -19,6 +19,7 @@ import PrivacyPolicy from "./routes/PrivacyPolicy";
 import { notify } from "./utils/notify";
 import { prettyPrintAmount } from "./utils/prettyPrintAmount";
 import Home from "./routes/Home";
+import ConfirmRecovery from "./routes/ConfirmRecovery";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -228,6 +229,11 @@ const App: FunctionalComponent = () => {
                         setUser={setUser}
                         user={user}
                         reset={reset}
+                    />
+                    <ConfirmRecovery
+                        setUser={setUser}
+                        user={user}
+                        path="/confirm-recovery"
                     />
                     <PrivacyPolicy path="/privacy-policy" />
                     <NotFoundPage default />

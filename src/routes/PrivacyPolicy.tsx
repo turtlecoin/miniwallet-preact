@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { h } from "preact";
-import { route } from "preact-router";
 import { useMemo, useState } from "preact/hooks";
 
 const PRIVACY_POLICY_URL =
@@ -31,14 +30,6 @@ export function PrivacyPolicy({ path }: { path: string }): h.JSX.Element {
     return (
         <div class="card container">
             <div class="pinched">
-                <button
-                    class="button-ghost"
-                    onClick={(): void => {
-                        route("/");
-                    }}
-                >
-                    🏠 Back Home
-                </button>
                 {privacyPolicyMd.split("\n").map((line, index) => {
                     if (line.trim() == "") {
                         return <span key={index} />;

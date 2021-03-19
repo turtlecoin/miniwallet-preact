@@ -28,7 +28,7 @@ function Register(props: {
         });
         if (res.status === 200) {
             props.setUser(await res.json());
-            route("/");
+            route("/app");
         } else {
             alert(await res.text());
         }

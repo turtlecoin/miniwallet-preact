@@ -4,6 +4,7 @@ export interface User {
     address: string;
     paymentID: string;
     twoFactor: boolean;
+    confirmedRecovery: boolean;
 }
 
 export interface Transaction {

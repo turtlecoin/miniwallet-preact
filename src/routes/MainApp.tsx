@@ -7,6 +7,7 @@ import {
 } from "../utils/prettyPrintAmount";
 import { Loader } from "../components/Loader";
 import { TransactionDetail } from "../components/TransactionDetail";
+import { route } from "preact-router";
 
 function MainApp(props: {
     path: string;
@@ -19,6 +20,11 @@ function MainApp(props: {
     syncData: { wallet: number; daemon: number };
 }): h.JSX.Element {
     if (!props.user || props.transactions == null || props.balance == null) {
+        return <Loader />;
+    }
+
+    if (!props.user.confirmedRecovery) {
+        route("/confirm-recovery");
         return <Loader />;
     }
 
