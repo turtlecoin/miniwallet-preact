@@ -2,12 +2,14 @@
 import { h } from "preact";
 import { route } from "preact-router";
 import { useState } from "preact/hooks";
+import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
 import { User } from "../types";
 
 function Login(props: {
     path: string;
     setUser: (user: User | null) => void;
+    user: User | null;
 }): h.JSX.Element {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -44,6 +46,11 @@ function Login(props: {
             alert(await res.text());
         }
     };
+
+    if (props.user !== null) {
+        route("/app");
+        return <Loader />;
+    }
 
     return (
         <div class="card container no-menu">

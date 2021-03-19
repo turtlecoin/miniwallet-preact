@@ -221,8 +221,8 @@ const App: FunctionalComponent = () => {
                         path="/send"
                         user={user}
                     />
-                    <Login setUser={setUser} path="/login" />
-                    <Register setUser={setUser} path="/register" />
+                    <Login user={user} setUser={setUser} path="/login" />
+                    <Register user={user} setUser={setUser} path="/register" />
                     <Account
                         path="/account/:page?"
                         setUser={setUser}

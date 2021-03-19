@@ -8,6 +8,7 @@ import { API_URI } from "../constants/config";
 function Register(props: {
     setUser: (user: User | null) => void;
     path: string;
+    user: User | null;
 }): h.JSX.Element {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -32,6 +33,10 @@ function Register(props: {
             alert(await res.text());
         }
     };
+
+    if (props.user !== null) {
+        route("/app");
+    }
 
     return (
         <div class="card container no-menu">
