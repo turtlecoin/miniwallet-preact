@@ -20,6 +20,7 @@ import { notify } from "./utils/notify";
 import { prettyPrintAmount } from "./utils/prettyPrintAmount";
 import Home from "./routes/Home";
 import ConfirmRecovery from "./routes/ConfirmRecovery";
+import Recover from "./routes/Recover";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -236,6 +237,7 @@ const App: FunctionalComponent = () => {
                         path="/confirm-recovery"
                     />
                     <PrivacyPolicy path="/privacy-policy" />
+                    <Recover user={user} setUser={setUser} path="/recover" />
                     <NotFoundPage default />
                 </Router>
             </div>

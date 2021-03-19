@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Fragment, h } from "preact";
-import { route } from "preact-router";
+import { Link, route } from "preact-router";
 import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { h } from "preact";
-import { route } from "preact-router";
+import { Link, route } from "preact-router";
 import { useState } from "preact/hooks";
 import { Loader } from "../components/Loader";
 import { API_URI } from "../constants/config";
@@ -107,6 +107,11 @@ function Login(props: {
                                     setPassword(event.target.value);
                                 }}
                             />
+                            <p>
+                                <Link href="/recover">
+                                    Recover your account
+                                </Link>
+                            </p>
                             <div class="buttons right">
                                 <button className="button-primary">
                                     Log In
