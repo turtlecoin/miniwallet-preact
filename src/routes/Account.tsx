@@ -56,7 +56,7 @@ export function Account(props: {
                         </li>
                         <li class="heading">Wallet</li>
                         <li>
-                            <Link href={"/account/backup"}>Backup</Link>
+                            <Link href={"/account/backup"}>Export Keys</Link>
                         </li>
                         <li class="heading">Account</li>
                         <li>

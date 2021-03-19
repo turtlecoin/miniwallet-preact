@@ -48,7 +48,7 @@ function Backup(props: { user: User | null }): h.JSX.Element {
                 >
                     ⬅️
                 </span>{" "}
-                Backup Your Keys
+                Export Keys
             </h5>
             {secrets.spendKey === "" && (
                 <div>
