@@ -15,13 +15,9 @@ function Header(props: {
             method: "POST",
             credentials: "include",
         });
-        route("/login");
+        route("/");
         props.setUser(null);
     };
-
-    if (!props.user) {
-        return <span />;
-    }
 
     return (
         <header>
@@ -29,10 +25,25 @@ function Header(props: {
                 <ul class="horizontal gray navbar">
                     <div class="container nav-container">
                         <li>
-                            <Link href="/" activeClassName="active">
+                            <Link
+                                href={props.user === null ? "/" : "/app"}
+                                activeClassName="active"
+                            >
                                 Home
                             </Link>
                         </li>
+                        {props.user == null && (
+                            <Fragment>
+                                <li>
+                                    <Link
+                                        href="/login"
+                                        activeClassName="active"
+                                    >
+                                        Login
+                                    </Link>
+                                </li>
+                            </Fragment>
+                        )}
                         {props.user !== null && (
                             <Fragment>
                                 <li>

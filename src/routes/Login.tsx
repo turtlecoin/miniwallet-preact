@@ -33,7 +33,7 @@ function Login(props: {
         });
         if (res.status === 200) {
             props.setUser(await res.json());
-            route("/");
+            route("/app");
         } else if (res.status === 202) {
             setCollect2FA(true);
         } else if (res.status === 401) {

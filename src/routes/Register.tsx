@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { h } from "preact";
 import { useState } from "preact/hooks";
-import { route } from "preact-router";
+import { Link, route } from "preact-router";
 import { User } from "../types";
 import { API_URI } from "../constants/config";
 
@@ -73,6 +73,10 @@ function Register(props: {
                                     }}
                                 />
                             </div>
+                            <p>
+                                By siging up you are agreeing to our{" "}
+                                <Link href="/">terms of service.</Link>
+                            </p>
                             <div class="buttons right">
                                 <button class="button-primary">Register</button>
                             </div>

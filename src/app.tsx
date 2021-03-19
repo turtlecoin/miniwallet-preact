@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FunctionalComponent, h } from "preact";
-import { Router, route, Link } from "preact-router";
+import { Router, Link } from "preact-router";
 
-import Home from "./routes/Home";
+import MainApp from "./routes/MainApp";
 import NotFoundPage from "./routes/404";
 import Header from "./components/Header";
 import { useMemo, useState } from "preact/hooks";
@@ -18,6 +18,7 @@ import { API_URI } from "./constants/config";
 import PrivacyPolicy from "./routes/PrivacyPolicy";
 import { notify } from "./utils/notify";
 import { prettyPrintAmount } from "./utils/prettyPrintAmount";
+import Home from "./routes/Home";
 
 const App: FunctionalComponent = () => {
     const [user, setUser] = useState<User | null>(null);
@@ -120,8 +121,6 @@ const App: FunctionalComponent = () => {
                 });
                 if (res.status === 200) {
                     setUser(await res.json());
-                } else {
-                    route("/login");
                 }
             } catch (err) {
                 console.warn(err.toString());
@@ -204,7 +203,8 @@ const App: FunctionalComponent = () => {
             <div class="content">
                 <Header user={user} setUser={setUser} reset={reset} />
                 <Router>
-                    <Home
+                    <Home path="/" />
+                    <MainApp
                         syncData={syncData}
                         deadSocket={deadSocket}
                         transactions={transactions}
@@ -212,7 +212,7 @@ const App: FunctionalComponent = () => {
                         user={user}
                         balance={balance}
                         prices={prices}
-                        path="/"
+                        path="/app"
                     />
                     <Receive user={user} path="/receive" />
                     <Send

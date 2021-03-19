@@ -1,92 +1,75 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { h } from "preact";
-import { Transaction, User } from "../types";
-import {
-    numberWithCommas,
-    prettyPrintAmount,
-} from "../utils/prettyPrintAmount";
-import { Loader } from "../components/Loader";
-import { TransactionDetail } from "../components/TransactionDetail";
+import { FunctionalComponent, h } from "preact";
+import { route } from "preact-router";
 
-function Home(props: {
-    path: string;
-    user: User | null;
-    setUser: (user: User | null) => void;
-    balance: { unlocked: number; locked: number } | null;
-    transactions: Transaction[] | null;
-    prices: Record<string, number>;
-    deadSocket: boolean;
-    syncData: { wallet: number; daemon: number };
-}): h.JSX.Element {
-    if (!props.user || props.transactions == null || props.balance == null) {
-        return <Loader />;
-    }
-
-    const total = props.balance.unlocked + props.balance.locked;
-
+const Home: FunctionalComponent = () => {
     return (
         <div class="card container">
-            <div class="right-tags">
-                {props.deadSocket && (
-                    <p class="alert danger">🔴 Disconnected</p>
-                )}
-                {props.syncData.daemon - props.syncData.wallet > 2 && (
-                    <p class="alert warning">🟡 Synchronizing</p>
-                )}
-                {props.balance.locked > 0 && (
-                    <p class="alert info">
-                        🔒 {prettyPrintAmount(total - props.balance.unlocked)}{" "}
-                        locked
-                    </p>
-                )}
-            </div>
             <div class="pinched">
-                <div class="balance">
-                    <h4 class="has-text-bold">
-                        {prettyPrintAmount(total, true)}
-                    </h4>
-                </div>
-                <h6 class="fiat-balance">
-                    {numberWithCommas(
-                        Number(
-                            (
-                                props.prices["turtlecoin"] *
-                                (total / 100)
-                            ).toFixed(2)
-                        )
-                    )}{" "}
-                    USD
-                </h6>
-            </div>
-            {props.transactions.length > 0 && (
-                <div>
-                    <p
-                        style={{
-                            backgroundColor: "#F5F5F5",
-                            padding: "1rem",
-                            margin: "0",
-                            fontWeight: "bold",
-                        }}
+                <h3>Welcome to TRTL Miniwallet</h3>
+                <p>
+                    Miniwallet is a webwallet for TurtleCoin with a focus on
+                    being small and easy to use. You can use it in browser, and
+                    we also have native apps for Android and iOS. Manage your
+                    TurtleCoin wherever you are, we'll keep your wallet synced
+                    for you.
+                </p>
+                <p>
+                    Disclaimer: Miniwallet is a <strong>custodial</strong> web
+                    wallet meaning that we retain a copy of your private keys on
+                    our server. You are also provided with the private keys so
+                    you can sync the wallet in any other wallet application of
+                    your choosing. We do the best we can to keep your funds
+                    safe, but we take no responsibility and provide no warranty
+                    for the safety of or suitabilty of these services. Please
+                    ensure you back up your private key in the settings page as
+                    you and only you are responsible for the safety of your
+                    funds.
+                </p>
+                <p>
+                    For more information about our terms of service, please
+                    refer to the miniwallet{" "}
+                    <a
+                        href="https://github.com/turtlecoin/miniwallet-preact/blob/master/LICENSE"
+                        target="__blank"
+                        rel="noreferrer"
                     >
-                        Transactions
-                    </p>
-                    <div class="tx-table-wrapper">
-                        {props.transactions.map((tx) => (
-                            <TransactionDetail
-                                syncData={props.syncData}
-                                tx={tx}
-                            />
-                        ))}
-                    </div>
-                </div>
-            )}
-            {props.transactions.length === 0 && (
-                <div class="pinched">
-                    <p>You don't have any transactions yet!</p>
-                </div>
-            )}
+                        software license.
+                    </a>
+                </p>
+                <button
+                    class="button-ghost"
+                    onClick={(): void => {
+                        route("/register");
+                    }}
+                >
+                    Sign up
+                </button>
+                <br />
+                <br />
+                <a
+                    href="https://apps.apple.com/us/app/trtl-wallet/id1555827693"
+                    target="__blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        style={{ margin: "9px" }}
+                        src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg"
+                    />
+                </a>
+                <a
+                    href="https://play.google.com/store/apps/details?id=lol.trtl.miniwallet&hl=en_US&gl=US"
+                    target="__blank"
+                    rel="noreferrer"
+                >
+                    <img
+                        style={{ display: "inline-block", width: "150px" }}
+                        alt="Get it on Google Play"
+                        src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+                    />
+                </a>
+            </div>
         </div>
     );
-}
+};
 
 export default Home;
